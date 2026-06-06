@@ -3,206 +3,552 @@
     <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>我的股票视频看板</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🚦 红绿灯导航 · YT股票视频 直通车</title>
         <style>
-            body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
-            .container { max-width: 1200px; margin: 0 auto; }
-            h2 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
-            .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 15px; }
-            .video-card { display: flex; background: #fff; border: 1px solid #ddd; padding: 10px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-            .video-card img { width: 160px; height: 90px; object-fit: cover; border-radius: 4px; margin-right: 15px; }
-            .video-info { display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
-            .video-info h3 { margin: 0 0 5px 0; font-size: 14px; line-height: 1.3; }
-            .video-info h3 a { text-decoration: none; color: #333; }
-            .video-info h3 a:hover { color: #cc0000; }
-            .meta { margin: 0; font-size: 12px; color: #666; }
-            .tag { background: #eee; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 5px; color: #333; }
-            .report-btn { align-self: flex-start; background: none; border: none; color: #0056b3; cursor: pointer; font-size: 12px; padding: 0; margin-top: 5px; }
+            :root {
+                --bg-color: #f6f8fa;
+                --card-bg: #ffffff;
+                --text-main: #24292f;
+                --text-muted: #57606a;
+                --primary-color: #0969da;
+                --my-color: #2da44e;
+                --us-color: #bf360c;
+                --border-color: #d0d7de;
+                --promo-bg: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            }
+            body { 
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
+                background-color: var(--bg-color); 
+                margin: 0; 
+                padding: 0; 
+                color: var(--text-main);
+            }
+            .header {
+                background: var(--card-bg);
+                border-bottom: 1px solid var(--border-color);
+                padding: 20px;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            }
+            .header-content { max-width: 1300px; margin: 0 auto; }
+            h2 { margin: 0 0 15px 0; font-size: 24px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; color: #111827; }
+            .update-time { font-size: 13px; color: var(--text-muted); font-weight: normal; }
+            
+            /* 📣 黄金引流推广位样式 */
+            .promo-banner {
+                background: var(--promo-bg);
+                color: white;
+                padding: 14px 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .promo-text { display: flex; flex-direction: column; gap: 4px; }
+            .promo-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+            .promo-sub { font-size: 13px; color: #e0f2fe; opacity: 0.9; }
+            .promo-action { display: flex; align-items: center; gap: 12px; }
+            .promo-contact { font-size: 14px; background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }
+            .join-btn {
+                background: #ffffff;
+                color: #1e3a8a;
+                text-decoration: none;
+                padding: 8px 18px;
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 700;
+                transition: all 0.2s;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .join-btn:hover { background: #f8fafc; transform: scale(1.03); }
+
+            /* 智能筛选工具栏 */
+            .filter-container { display: flex; gap: 20px; flex-wrap: wrap; background: #f0f2f5; padding: 10px 15px; border-radius: 8px; }
+            .filter-group { display: flex; align-items: center; gap: 8px; }
+            .filter-label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+            .filter-btn {
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                padding: 6px 14px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 500;
+                transition: all 0.2s;
+            }
+            .filter-btn:hover { background: #f3f4f6; }
+            .filter-btn.active {
+                background: var(--primary-color);
+                color: white;
+                border-color: var(--primary-color);
+                box-shadow: 0 2px 4px rgba(9, 105, 218, 0.3);
+            }
+
+            /* 网格布局与卡片 */
+            .container { max-width: 1300px; margin: 25px auto; padding: 0 20px; }
+            .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
+            @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
+            
+            .video-card { 
+                display: flex; 
+                background: var(--card-bg); 
+                border: 1px solid var(--border-color); 
+                padding: 12px; 
+                border-radius: 12px; 
+                box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .video-card:hover { 
+                transform: translateY(-4px); 
+                box-shadow: 0 8px 16px rgba(0,0,0,0.08); 
+            }
+            
+            .thumbnail-wrapper { flex-shrink: 0; width: 150px; height: 95px; margin-right: 14px; border-radius: 8px; overflow: hidden; background: #eee; }
+            .thumbnail-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+            
+            .video-info { display: flex; flex-direction: column; justify-content: space-between; flex: 1; min-width: 0; }
+            .video-info h3 { margin: 0 0 8px 0; font-size: 14px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .video-info h3 a { text-decoration: none; color: var(--text-main); }
+            .video-info h3 a:hover { color: var(--primary-color); }
+            
+            .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 5px; }
+            .meta-text { margin: 0; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            
+            .market-tag { font-size: 11px; padding: 2px 8px; border-radius: 2em; font-weight: 600; white-space: nowrap; }
+            .tag-my { background: #dafbe1; color: var(--my-color); }
+            .tag-us { background: #ffe7e6; color: var(--us-color); }
+            
+            .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #edf2f7; padding-top: 8px; }
+            .report-btn { background: none; border: none; color: #cf222e; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 3px; padding: 4px; border-radius: 4px; }
+            .report-btn:hover { background: #ffe7e6; }
+            .play-btn { text-decoration: none; font-size: 12px; background: #f3f4f6; color: var(--text-main); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-weight: 500; transition: all 0.2s; }
+            .play-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
         </style>
     </head>
     <body>
-        <div class="container">
-            <h2>From Social Media (更新时间: 2026-06-06 15:41)</h2>
-            <div class="grid">
+        <div class="header">
+            <div class="header-content">
+                <h2>
+                    <span>🚦 红绿灯导航 · YT股票视频 直通车</span>
+                    <span class="update-time">🔄 更新时间: 2026-06-06 16:05</span>
+                </h2>
                 
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank">
+                <!-- 📣 引流横幅组件 -->
+                <div class="promo-banner">
+                    <div class="promo-text">
+                        <div class="promo-title">👥 欢迎加入【SF 趋势跟势交流群】</div>
+                        <div class="promo-sub">💡 每天盘前分享马股、美股风险提示与趋势策略！</div>
+                    </div>
+                    <div class="promo-action">
+                        <div class="promo-contact">💬 添加: 红绿灯导航</div>
+                        <a href="https://t.me/allanng" target="_blank" class="join-btn">🚀 立即入群</a>
+                    </div>
+                </div>
+                
+                <!-- 智能筛选栏 -->
+                <div class="filter-container">
+                    <div class="filter-group">
+                        <span class="filter-label">市场分类:</span>
+                        <button class="filter-btn active" onclick="filterMarket('全部', this)">全部</button>
+                        <button class="filter-btn" onclick="filterMarket('马股', this)">🇲🇾 马股</button>
+                        <button class="filter-btn" onclick="filterMarket('美股', this)">🇺🇸 美股</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">时间范围:</span>
+                        <button class="filter-btn active" onclick="filterTime('全部', this)">全部</button>
+                        <button class="filter-btn" onclick="filterTime('今天', this)">🔥 今天</button>
+                        <button class="filter-btn" onclick="filterTime('本周', this)">📅 本周内</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="grid" id="videoGrid">
+                
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/ipL-VVkA5dE/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank">【现实人生】第1303期 大马政局陷入混乱 莱士雅丁表示未经四大酋长同意希盟解散森州议会不合法</a></h3>
-                <p class="meta">Posted by CLEO 极美人生 at 2026-06-06 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Z2QWru7-skU/hqdefault_live.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank">06 06 2026 第760期：马股！国家队开工！</a></h3>
-                <p class="meta">Posted by 我是雷公 at 2026-06-06 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 我是雷公 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/WsAkjnHr1Pc/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank">马股大行情NATGATE股价趋势分析，庄家价位在哪里？#马股 #科技股 #natgate</a></h3>
-                <p class="meta">Posted by TI 懂一点 at 2026-06-06 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 TI 懂一点 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/mADXrFB1HyE/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank">市场短期过热之后，终于开始重新定价风险！昨晚美股科技股集体回调，纳斯达克单日跌幅超过4%，很多人第一反应是：是不是N市结束了？#美股 #美股入门 #美股分析 #美股赚钱 #投資</a></h3>
-                <p class="meta">Posted by 一乐到底 at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 一乐到底 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/AxJ_0rFb-10/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank">買美股致富還怒罵「考生混吃等死」 粉筆CEO炫富失敗爆粗口引眾怒急道歉！@ebcCTime #shorts</a></h3>
-                <p class="meta">Posted by 關鍵時刻 at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 關鍵時刻 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/u7aoQjfM1sk/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank">台股ETFVS台積電績效#友達#群創#台股#美股#台積電#鴻海#力積電#聯電#華邦電</a></h3>
-                <p class="meta">Posted by 投資深淵 at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 投資深淵 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/M2ztdgMXpgk/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank">美股暴跌，强非农+SpaceX双重绞杀！半导体一夜惨烈暴跌10%，击球区不远了！ #techstocks #usstocks #semiconductor #spacex #ratecut #fed</a></h3>
-                <p class="meta">Posted by 老雷财经 at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 老雷财经 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/XBRzqUyEWQI/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank">英伟达不需要内存？订阅频道，观看完整版｜ #投資 #美股 #美股</a></h3>
-                <p class="meta">Posted by Cici on the way at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 Cici on the way &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DjunmIODIZ8/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank">台指期夜盤暴跌3006點</a></h3>
-                <p class="meta">Posted by 投資趣 at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 投資趣 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/VmzyfoKFZ1U/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank">星期五美股全線暴跌，你成功逃頂了嗎？是贪婪了吗 #美股 #投資心法 #贪婪和恐惧 #美股为什么暴跌 #股票暴跌#美股暴跌</a></h3>
-                <p class="meta">Posted by SaveQuant at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 SaveQuant &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/TpzESWyYphc/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank">週一台股剉咧等? 美股收黑「AI遭血洗」! 費半跌10%疫情來最慘 黑色星期一再現? 網友哀號:怕台股血流成河 花旗:股市2008年以來最大泡沫風險｜TVBS新聞 @TVBSNEWS01</a></h3>
-                <p class="meta">Posted by TVBS NEWS at 2026-06-06 <span class="tag">美股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 TVBS NEWS &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=tpsYfBxMfZo" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/tpsYfBxMfZo/hqdefault.jpg" alt="Thumbnail">
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=tpsYfBxMfZo" target="_blank">[马股][投行报告]Petronas Dagangan 报告 (HLIB) June 2026</a></h3>
+                <div class="meta-row">
+                    <p class="meta-text">👤 股市章鱼 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=tpsYfBxMfZo" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=LbMx8Tz_6i4" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/LbMx8Tz_6i4/hqdefault.jpg" alt="Thumbnail">
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=LbMx8Tz_6i4" target="_blank">【韭菜人生】第862期 比特币科技股太空股大暴跌 纳斯达克指数单日跌1121点创纪录</a></h3>
+                <div class="meta-row">
+                    <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=LbMx8Tz_6i4" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
+            <a href="https://www.youtube.com/watch?v=jLYF4_CwCKk" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/jLYF4_CwCKk/hqdefault.jpg" alt="Thumbnail">
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=jLYF4_CwCKk" target="_blank">割韭菜時間到了？美股崩跌引發恐慌｜20260606 自由觀點｜#shorts</a></h3>
+                <div class="meta-row">
+                    <p class="meta-text">👤 自由追新聞 &nbsp;&nbsp; 📅 2026-06-06</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=jLYF4_CwCKk" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/4Qjvf5kh2yY/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank">数据中心瓶颈不是芯片？这家马股正手握着命门</a></h3>
-                <p class="meta">Posted by GoLET投资空间 at 2026-06-05 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 GoLET投资空间 &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/ct0LQ8jBCEQ/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank">【韭菜人生】第860期 罪恶税盆满钵满 云顶赌场税5年贡献150亿 啤酒厂5年缴税130亿</a></h3>
-                <p class="meta">Posted by CLEO 极美人生 at 2026-06-05 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/N9PSZhZYD1I/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank">5.6.2026 - 马股快讯 (又有一家公司将脱离PN17)</a></h3>
-                <p class="meta">Posted by Bursa News (马股-报报看) at 2026-06-05 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 Bursa News (马股-报报看) &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/j21fKMQeLn0/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank">KS看股 | 马股 KLSE BURSA 分享 | 5-6-2026 | 马股反弹! KLCI涨10点! | 建筑和房产板块跌 | UTDPLT SCGBHD VITROX  SLVEST</a></h3>
-                <p class="meta">Posted by Trading with KS at 2026-06-05 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 Trading with KS &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
-        <div class="video-card">
-            <a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DaLAIHJ_sQU/hqdefault.jpg" alt="Thumbnail">
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank">马股klse止跌背后的真正推手 #klse #trading #klci #投資 #股哥说股 #bursamalaysia #马股</a></h3>
-                <p class="meta">Posted by 股哥说股@jeff at 2026-06-05 <span class="tag">马股</span></p>
-                <button class="report-btn" onclick="alert('Reported!')">Report</button>
+                <div class="meta-row">
+                    <p class="meta-text">👤 股哥说股@jeff &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-my">马股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
             </div>
         </div>
         
             </div>
         </div>
+
+        <script>
+            let currentMarket = '全部';
+            let currentTime = '全部';
+
+            function filterMarket(market, btn) {
+                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMarket = market;
+                applyFilters();
+            }
+
+            function filterTime(timeRange, btn) {
+                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentTime = timeRange;
+                applyFilters();
+            }
+
+            function applyFilters() {
+                const cards = document.querySelectorAll('.video-card');
+                const todayStr = new Date().toISOString().split('T')[0];
+                
+                const now = new Date();
+                const day = now.getDay();
+                const diff = now.getDate() - day + (day === 0 ? -6 : 1); 
+                const mondayStr = new Date(now.setDate(diff)).toISOString().split('T')[0];
+
+                cards.forEach(card => {
+                    const market = card.getAttribute('data-market');
+                    const date = card.getAttribute('data-date');
+                    
+                    let matchMarket = (currentMarket === '全部' || market === currentMarket);
+                    let matchTime = false;
+
+                    if (currentTime === '全部') {
+                        matchTime = true;
+                    } else if (currentTime === '今天') {
+                        matchTime = (date === todayStr);
+                    } else if (currentTime === '本周') {
+                        matchTime = (date >= mondayStr);
+                    }
+
+                    if (matchMarket && matchTime) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        </script>
     </body>
     </html>
     
