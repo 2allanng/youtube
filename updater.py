@@ -4,7 +4,7 @@ import datetime
 from googleapiclient.discovery import build
 
 # ================= 配置区域 =================
-API_KEY = '你的_YOUTUBE_API_KEY'  # 替换成你的 YouTube API Key
+API_KEY = 'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'  # 替换成你的 YouTube API Key
 JSON_FILE = 'data.json'          # 本地数据存储文件
 HTML_FILE = 'index.html'         # 本地生成的网页文件
 # ===========================================
