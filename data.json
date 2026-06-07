@@ -15,7 +15,8 @@
         "video_url": "https://www.youtube.com/watch?v=Z2QWru7-skU",
         "channel": "我是雷公",
         "date": "2026-06-06",
-        "keyword": "马股"
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
     },
     {
         "id": "WsAkjnHr1Pc",
@@ -150,7 +151,8 @@
         "video_url": "https://www.youtube.com/watch?v=tpsYfBxMfZo",
         "channel": "股市章鱼",
         "date": "2026-06-06",
-        "keyword": "马股"
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
     },
     {
         "id": "LbMx8Tz_6i4",
@@ -159,7 +161,8 @@
         "video_url": "https://www.youtube.com/watch?v=LbMx8Tz_6i4",
         "channel": "CLEO 极美人生",
         "date": "2026-06-06",
-        "keyword": "马股"
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
     },
     {
         "id": "jLYF4_CwCKk",
@@ -177,7 +180,8 @@
         "video_url": "https://www.youtube.com/watch?v=xzIyrfulhU0",
         "channel": "股市老司机",
         "date": "2026-06-06",
-        "keyword": "马股"
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
     },
     {
         "id": "LPSgt4tsj6A",
@@ -186,7 +190,8 @@
         "video_url": "https://www.youtube.com/watch?v=LPSgt4tsj6A",
         "channel": "股市章鱼",
         "date": "2026-06-06",
-        "keyword": "马股"
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
     },
     {
         "id": "pg07FyDajKQ",
@@ -267,7 +272,8 @@
         "video_url": "https://www.youtube.com/watch?v=9LQJvKPlbZ0",
         "channel": "Trading with KS",
         "date": "2026-06-06",
-        "keyword": "马股"
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
     },
     {
         "id": "Wfi0ba19YkM",
@@ -624,5 +630,35 @@
         "date": "2026-06-01",
         "keyword": "美股",
         "sub_category": "马股隐藏价值"
+    },
+    {
+        "id": "KepcOdYVQ3Q",
+        "title": "KS看股 - 每周图标回顾 - 7-6-2026💥小心科技股!💥INARI EG GCB SMRT DUFU TOPGLOV HARTA UNISEM MI KGB IJM GAMUDA AAX",
+        "thumbnail": "https://i.ytimg.com/vi/KepcOdYVQ3Q/hqdefault.jpg",
+        "video_url": "https://www.youtube.com/watch?v=KepcOdYVQ3Q",
+        "channel": "Trading with KS",
+        "date": "2026-06-07",
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
+    },
+    {
+        "id": "FV4WeKF9ATM",
+        "title": "下星期亂進場，最容易被套 #交易心理 #投資 #股市#投资陷阱 #炒股教学#投資 #美股#财经 #金融 #股票#马股投资 #股市 #领涨 #台股",
+        "thumbnail": "https://i.ytimg.com/vi/FV4WeKF9ATM/hqdefault.jpg",
+        "video_url": "https://www.youtube.com/watch?v=FV4WeKF9ATM",
+        "channel": "股市老司机",
+        "date": "2026-06-07",
+        "keyword": "马股",
+        "sub_category": "全网模糊热点"
+    },
+    {
+        "id": "1xGB7JKG6b8",
+        "title": "台股崩盤美股大跌台積電VS台積電ADR#ETF#友達#群創#台股#美股#台積電#鴻海#力積電#聯電#華邦電",
+        "thumbnail": "https://i.ytimg.com/vi/1xGB7JKG6b8/hqdefault.jpg",
+        "video_url": "https://www.youtube.com/watch?v=1xGB7JKG6b8",
+        "channel": "投資深淵",
+        "date": "2026-06-07",
+        "keyword": "美股",
+        "sub_category": "全网模糊热点"
     }
 ]

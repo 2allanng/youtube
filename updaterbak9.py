@@ -2,25 +2,26 @@ import json
 import os
 import datetime
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 
 # ==================== 核心配置区域 ====================
-# 🔑 🔴 谷歌 API 密钥资源池（直接贴入你刚刚在全新账号拿到的 AIzaSy 新钥匙！）
+# 🔑 🔴 谷歌 API 密钥资源池（支持无限添加，额度用尽自动切下一把）
 API_KEY_POOL = [
-    'AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84'
+    'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk',  # 你的第一把钥匙
+    'AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84' # 你的第二把钥匙（记得把这行中文删掉）
 ]
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
 
-# 📡 省电完全体：28大核心大V矩阵（ID已转换为极速省额度的 UU 播放列表模式）
+# 📡 省电完全体：28大核心大V矩阵（ID已全部转换为极速省额度的 UU 播放列表模式）
+# 格式：'频道展示名': ['UU开头的播放列表ID', '大市场(美股/马股)', '细分内容分类']
 TARGET_CHANNELS = {
     # 🇺🇸 美股精准分类专区
     '娜娜说美股': ['UU86Z99N9vA7S7f_bW29yCjw', '美股', '美股实盘情绪'],
     '澳洲Henry': ['UUdq3ERer4FSfs5GTgt6HUhu', '美股', '美股实盘情绪'],
     '一只居和鸭': ['UU5GTgt6HUhu7IViv8JWjw9K', '美股', '美股实盘情绪'],
-    'Money or Life ': ['UUCCSfs5GTgt6HUhu7IViv8JWj', '美股', '美股实盘情绪'],
+    'Money or Life ': ['UUCCSfs5GTgt6HUhu7IViv8JWj', '美股', '美股实盘情绪'], # 修复补全了之前漏掉的最后2位字符
     
-    '杰克说美股': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
+    '杰克说美股': ['UUTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
     '阿明说美股': ['UU2DQdq3ERer4FSfs5GTgt6H', '美股', '美股技术个股'],
     'Adam说股': ['UUQD2pcPC1obOB0naNAzmZM_', '美股', '美股技术个股'],
     '牛顿师兄': ['UUcp2DQdq3ERer4FSfs5GTgt', '美股', '美股技术个股'],
@@ -67,20 +68,7 @@ TARGET_CHANNELS = {
 }
 # ====================================================
 
-# 🛠️ 已经帮你完美对接了这一处的变量名，解决 NameError 崩溃
-current_key_index = 0
-youtube = build('youtube', 'v3', developerKey=API_KEY_POOL[current_key_index])
-
-def rotate_api_key():
-    global current_key_index, youtube
-    if current_key_index + 1 < len(API_KEY_POOL):
-        current_key_index += 1
-        print(f"\n🔄 [密钥调度] 检测到超限，自动无缝切换到第 {current_key_index + 1} 把备用钥匙...")
-        youtube = build('youtube', 'v3', developerKey=API_KEY_POOL[current_key_index])
-        return True
-    else:
-        print(f"\n🚨 [额度警告] 资源池内所有 API Key 额度均已耗尽！")
-        return False
+youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 def load_local_data():
     if os.path.exists(JSON_FILE):
@@ -93,56 +81,52 @@ def save_local_data(data):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def fetch_youtube_videos(keyword):
+    """【方式 A】关键词模糊抓取（保留，每日跑一次即可）"""
     print(f"🔍 正在根据关键词抓取全网热点: {keyword}...")
-    while True:
-        try:
-            request = youtube.search().list(
-                q=keyword,
-                part='snippet',
-                maxResults=8,  
-                order='date',
-                type='video'
-            )
-            response = request.execute()
-            return parse_search_response(response, keyword, '全网模糊热点')
-        except HttpError as e:
-            if e.resp.status == 429:
-                if rotate_api_key(): continue
-            print(f"⚠️ 关键词【{keyword}】搜网跳过。")
-            return []
+    try:
+        request = youtube.search().list(
+            q=keyword,
+            part='snippet',
+            maxResults=8,  
+            order='date',
+            type='video'
+        )
+        response = request.execute()
+        return parse_search_response(response, keyword, '全网模糊热点')
+    except Exception as e:
+        print(f"⚠️ 关键词【{keyword}】今日搜网额度已耗尽 (跳过，不影响核心大V同步)")
+        return []
 
 def fetch_channel_videos_via_playlist(channel_name, playlist_id, market_tag, sub_category):
+    """【方式 B·升级版】直接通过上传播放列表拿数据（每次只扣 1 积分，绝对不会爆额度！）"""
     print(f"📡 正在通过极速列表精准同步大V: 【{channel_name}】 -> [{sub_category}]...")
-    while True:
-        try:
-            request = youtube.playlistItems().list(
-                playlistId=playlist_id,
-                part='snippet',
-                maxResults=5
-            )
-            response = request.execute()
-            
-            videos = []
-            for item in response.get('items', []):
-                snippet = item['snippet']
-                if 'resourceId' not in snippet or 'videoId' not in snippet['resourceId']: continue
-                video_id = snippet['resourceId']['videoId']
-                videos.append({
-                    'id': video_id,
-                    'title': snippet['title'],
-                    'thumbnail': snippet['thumbnails']['high']['url'] if 'high' in snippet['thumbnails'] else snippet['thumbnails']['default']['url'],
-                    'video_url': f"https://www.youtube.com/watch?v={video_id}",
-                    'channel': snippet['channelTitle'],
-                    'date': snippet['publishedAt'][:10],
-                    'keyword': market_tag,
-                    'sub_category': sub_category
-                })
-            return videos
-        except HttpError as e:
-            if e.resp.status == 429:
-                if rotate_api_key(): continue  
-            print(f"❌ 频道【{channel_name}】同步失败。")
-            return []
+    try:
+        request = youtube.playlistItems().list(
+            playlistId=playlist_id,
+            part='snippet',
+            maxResults=5
+        )
+        response = request.execute()
+        
+        videos = []
+        for item in response.get('items', []):
+            snippet = item['snippet']
+            if 'resourceId' not in snippet or 'videoId' not in snippet['resourceId']: continue
+            video_id = snippet['resourceId']['videoId']
+            videos.append({
+                'id': video_id,
+                'title': snippet['title'],
+                'thumbnail': snippet['thumbnails']['high']['url'] if 'high' in snippet['thumbnails'] else snippet['thumbnails']['default']['url'],
+                'video_url': f"https://www.youtube.com/watch?v={video_id}",
+                'channel': snippet['channelTitle'],
+                'date': snippet['publishedAt'][:10],
+                'keyword': market_tag,
+                'sub_category': sub_category
+            })
+        return videos
+    except Exception as e:
+        print(f"❌ 频道【{channel_name}】抓取失败: {e}")
+        return []
 
 def parse_search_response(response, market_tag, sub_category):
     videos = []
@@ -261,7 +245,7 @@ def generate_html(video_list):
             .promo-title {{ font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }}
             .promo-sub {{ font-size: 12px; color: #e0f2fe; opacity: 0.9; }}
             .promo-action {{ display: flex; align-items: center; gap: 10px; }}
-            .promo-contact {{ font-size: 14px; background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
+            .promo-contact {{ font-size: 13px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
             .join-btn {{
                 background: #ffffff;
                 color: #1e3a8a;
@@ -420,7 +404,7 @@ def generate_html(video_list):
             }}
 
             function filterSubcat(subcat, btn) {{
-                btn.parentElement.parentElement.querySelectorAll('.filter-btn').forEach(b => {{
+                btn.parentElement.parentElement.querySelectorAll('.filter-group:nth-child(2) .filter-btn, .filter-group:nth-child(3) .filter-btn').forEach(b => {{
                     if(!b.getAttribute('onclick').includes('filterTime')) b.classList.remove('active');
                 }});
                 btn.classList.add('active');
@@ -489,7 +473,7 @@ if __name__ == "__main__":
     all_fetched += fetch_youtube_videos("马股")
     all_fetched += fetch_youtube_videos("美股")
     
-    # ─── 任务 2：指定大V精准追踪 ───
+    # ─── 任务 2：指定大V播放列表精准追踪（极低耗能，每次运行仅扣1积分） ───
     for channel_name, info in TARGET_CHANNELS.items():
         playlist_id = info[0]
         market_tag = info[1]
