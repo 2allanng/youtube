@@ -4,29 +4,9 @@ import datetime
 from googleapiclient.discovery import build
 
 # ==================== 核心配置区域 ====================
-# 🔴 你的专属谷歌钥匙
-API_KEY = 'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'  
+API_KEY = 'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'  # 记得保留两边的单引号
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
-
-# 📡 自定义指定频道列表（第三个参数为：⭐ 主播可信度评分/标签）
-# 格式为：'频道名字': ['频道ID', '市场分类', '可信度评分或评语']
-TARGET_CHANNELS = {
-    '娜娜说美股': ['UC86Z99N9vA7S7f_bW29yCjw', '美股', '⭐⭐⭐⭐⭐ (核心参考)'],
-    '澳洲Henry': ['UCdq3ERer4FSfs5GTgt6HUhu', '美股', '⭐⭐⭐⭐ (趋势右侧)'],
-    '杰克说美股': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '⭐⭐⭐⭐ (技术面)'],
-    '阳光财经': ['UC2I5em6UyBpQiO-8ZW0nV3w', '美股', '⭐⭐⭐⭐ (基本面)'],
-    '美股小头狼': ['UCbHz_wWlvaf_yueKyRbddyg', '美股', '⭐⭐⭐ (宏观大局)'],
-    '牛顿师兄': ['UCcp2DQdq3ERer4FSfs5GTgt', '美股', '⭐⭐⭐⭐ (筹码博弈)'],
-    '视野环球财经': ['UCo1CPcp2DQdq3ERer4FSfs5', '美股', '⭐⭐⭐⭐⭐ (全球宏观)'],
-    '贝拉聊财金': ['UC0naNAzmZM_ylYL-xkXK9wj', '美股', '⭐⭐⭐ (长线投资)'],
-    '美投侃新闻': ['UCy_MZmzANan0BObo1CPcp2D', '美股', '⭐⭐⭐⭐⭐ (数据挖掘)'],
-    '阿明说美股': ['UC2DQdq3ERer4FSfs5GTgt6H', '美股', '⭐⭐⭐ (日内短线)'],
-    'Adam说股': ['UCQD2pcPC1obOB0naNAzmZM_', '美股', '⭐⭐⭐⭐ (顺势追踪)'],
-    '一只居和鸭': ['UC5GTgt6HUhu7IViv8JWjw9K', '美股', '⭐⭐⭐ (情绪监控)'],
-    '艾财说imoneytalk': ['UCJ8viVI7uhUH6tgTG5sfSF4', '美股', '⭐⭐⭐⭐ (财报拆解)'],
-    'Money or Life ': ['UCSfs5GTgt6HUhu7IViv8JWj', '美股', '⭐⭐⭐ (风险提示)'],
-}
 # ====================================================
 
 youtube = build('youtube', 'v3', developerKey=API_KEY)
@@ -42,8 +22,7 @@ def save_local_data(data):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def fetch_youtube_videos(keyword):
-    """【方式 A】根据关键词模糊抓取最新视频"""
-    print(f"🔍 正在根据关键词抓取: {keyword}...")
+    print(f"正在抓取关键词: {keyword}...")
     try:
         request = youtube.search().list(
             q=keyword,
@@ -53,82 +32,40 @@ def fetch_youtube_videos(keyword):
             type='video'
         )
         response = request.execute()
-        return parse_youtube_response(response, keyword, "🔥 全网热点 (自动匹配)")
+        
+        videos = []
+        for item in response.get('items', []):
+            video_id = item['id']['videoId']
+            snippet = item['snippet']
+            videos.append({
+                'id': video_id,
+                'title': snippet['title'],
+                'thumbnail': snippet['thumbnails']['high']['url'],
+                'video_url': f"https://www.youtube.com/watch?v={video_id}",
+                'channel': snippet['channelTitle'],
+                'date': snippet['publishedAt'][:10],
+                'keyword': keyword
+            })
+        return videos
     except Exception as e:
-        print(f"❌ 关键词抓取失败: {e}")
+        print(f"抓取失败: {e}")
         return []
-
-def fetch_channel_videos(channel_name, channel_id, market_tag, rating):
-    """【方式 B】精确抓取指定大V频道的最新视频"""
-    print(f"📡 正在精准同步指定频道: 【{channel_name}】...")
-    try:
-        request = youtube.search().list(
-            channelId=channel_id,
-            part='snippet',
-            maxResults=5,  
-            order='date',
-            type='video'
-        )
-        response = request.execute()
-        return parse_youtube_response(response, market_tag, rating)
-    except Exception as e:
-        print(f"❌ 频道【{channel_name}】抓取失败: {e}")
-        return []
-
-def parse_youtube_response(response, market_tag, rating):
-    """统一解析 YouTube 返回的数据格式"""
-    videos = []
-    for item in response.get('items', []):
-        video_id = item['id']['videoId']
-        snippet = item['snippet']
-        videos.append({
-            'id': video_id,
-            'title': snippet['title'],
-            'thumbnail': snippet['thumbnails']['high']['url'],
-            'video_url': f"https://www.youtube.com/watch?v={video_id}",
-            'channel': snippet['channelTitle'],
-            'date': snippet['publishedAt'][:10],
-            'keyword': market_tag,
-            'rating': rating  # 将评分打包入数据库
-        })
-    return videos
 
 def generate_html(video_list):
     video_list.sort(key=lambda x: x['date'], reverse=True)
     display_videos = video_list[:300]  
 
-    # 计算今天和昨天的日期字符串，用于前端精确判定 NEW 标签
-    today_dt = datetime.date.today()
-    yesterday_dt = today_dt - datetime.timedelta(days=1)
-    today_str = today_dt.strftime('%Y-%m-%d')
-    yesterday_str = yesterday_dt.strftime('%Y-%m-%d')
-
     cards_html = ""
     for video in display_videos:
         tag_class = "tag-my" if video['keyword'] == "马股" else "tag-us"
         
-        # 1. 动态判定是否显示 NEW 标签
-        v_date = video['date']
-        is_new = (v_date == today_str or v_date == yesterday_str)
-        new_tag_html = '<span class="new-badge">NEW</span>' if is_new else ''
-
-        # 2. 获取可信度评分（兼容没有预设评分的旧数据）
-        rating_val = video.get('rating', '⭐ ⭐ ⭐ (系统推荐)')
-
         cards_html += f"""
         <div class="video-card" data-market="{video['keyword']}" data-date="{video['date']}">
             <a href="{video['video_url']}" target="_blank" class="thumbnail-wrapper">
                 <img src="{video['thumbnail']}" alt="Thumbnail">
-                {new_tag_html}
             </a>
             <div class="video-info">
                 <h3><a href="{video['video_url']}" target="_blank">{video['title']}</a></h3>
-                
-                <div class="rating-row">
-                    <span class="rating-label">🎯 可信度评分:</span>
-                    <span class="rating-value">{rating_val}</span>
-                </div>
-
                 <div class="meta-row">
                     <p class="meta-text">👤 {video['channel']} &nbsp;&nbsp; 📅 {video['date']}</p>
                     <span class="market-tag {tag_class}">{video['keyword']}</span>
@@ -142,10 +79,10 @@ def generate_html(video_list):
         """
 
     # ==================== 社群推广自定义内容 ====================
-    GROUP_NAME = "SF 趋势跟势交流群"            
-    GROUP_BENEFIT = "每天盘前分享马股、美股风险提示与趋势策略！"  
-    CONTACT_TEXT = "添加: 红绿灯导航"   
-    ACTION_URL = "https://t.me/allanng"       
+    GROUP_NAME = "SF 趋势跟势交流群"            # 你的群名称
+    GROUP_BENEFIT = "每天盘前分享马股、美股风险提示与趋势策略！"  # 入群核心价值
+    CONTACT_TEXT = "添加: 红绿灯导航"   # 联系方式说明
+    ACTION_URL = "https://t.me/allanng"       # 可以是点击直接跳转的 Telegram/WhatsApp 链接（若用微信可留空或填 #）
     # =========================================================
 
     html_template = f"""
@@ -187,6 +124,7 @@ def generate_html(video_list):
             h2 {{ margin: 0 0 15px 0; font-size: 24px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; color: #111827; }}
             .update-time {{ font-size: 13px; color: var(--text-muted); font-weight: normal; }}
             
+            /* 📣 黄金引流推广位样式 */
             .promo-banner {{
                 background: var(--promo-bg);
                 color: white;
@@ -218,6 +156,7 @@ def generate_html(video_list):
             }}
             .join-btn:hover {{ background: #f8fafc; transform: scale(1.03); }}
 
+            /* 智能筛选工具栏 */
             .filter-container {{ display: flex; gap: 20px; flex-wrap: wrap; background: #f0f2f5; padding: 10px 15px; border-radius: 8px; }}
             .filter-group {{ display: flex; align-items: center; gap: 8px; }}
             .filter-label {{ font-size: 13px; font-weight: 600; color: var(--text-muted); }}
@@ -239,6 +178,7 @@ def generate_html(video_list):
                 box-shadow: 0 2px 4px rgba(9, 105, 218, 0.3);
             }}
 
+            /* 网格布局与卡片 */
             .container {{ max-width: 1300px; margin: 25px auto; padding: 0 20px; }}
             .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }}
             @media (max-width: 500px) {{ .grid {{ grid-template-columns: 1fr; }} }}
@@ -257,40 +197,14 @@ def generate_html(video_list):
                 box-shadow: 0 8px 16px rgba(0,0,0,0.08); 
             }}
             
-            /* 缩略图外层容器（为了实现角标绝对定位） */
-            .thumbnail-wrapper {{ position: relative; flex-shrink: 0; width: 150px; height: 95px; margin-right: 14px; border-radius: 8px; overflow: hidden; background: #eee; }}
+            .thumbnail-wrapper {{ flex-shrink: 0; width: 150px; height: 95px; margin-right: 14px; border-radius: 8px; overflow: hidden; background: #eee; }}
             .thumbnail-wrapper img {{ width: 100%; height: 100%; object-fit: cover; }}
             
-            /* 🔥 动态 NEW 标签微动效样式 */
-            .new-badge {{
-                position: absolute;
-                top: 4px;
-                left: 4px;
-                background: #cf222e;
-                color: white;
-                font-size: 10px;
-                font-weight: 800;
-                padding: 2px 6px;
-                border-radius: 4px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                animation: pulse 2s infinite;
-            }}
-            @keyframes pulse {{
-                0% {{ opacity: 1; }}
-                50% {{ opacity: 0.7; }}
-                100% {{ opacity: 1; }}
-            }}
-            
             .video-info {{ display: flex; flex-direction: column; justify-content: space-between; flex: 1; min-width: 0; }}
-            .video-info h3 {{ margin: 0 0 6px 0; font-size: 14px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
+            .video-info h3 {{ margin: 0 0 8px 0; font-size: 14px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
             .video-info h3 a {{ text-decoration: none; color: var(--text-main); }}
             .video-info h3 a:hover {{ color: var(--primary-color); }}
             
-            /* ⭐ 评分栏专属样式 */
-            .rating-row {{ display: flex; align-items: center; gap: 6px; margin-bottom: 6px; background: #fff8e1; padding: 2px 8px; border-radius: 4px; border: 1px dashed #ffe082; }}
-            .rating-label {{ font-size: 11px; font-weight: 600; color: #b78103; }}
-            .rating-value {{ font-size: 11px; font-weight: 700; color: #d4af37; }}
-
             .meta-row {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 5px; }}
             .meta-text {{ margin: 0; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
             
@@ -313,6 +227,7 @@ def generate_html(video_list):
                     <span class="update-time">🔄 更新时间: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}</span>
                 </h2>
                 
+                <!-- 📣 引流横幅组件 -->
                 <div class="promo-banner">
                     <div class="promo-text">
                         <div class="promo-title">👥 欢迎加入【{GROUP_NAME}】</div>
@@ -324,6 +239,7 @@ def generate_html(video_list):
                     </div>
                 </div>
                 
+                <!-- 智能筛选栏 -->
                 <div class="filter-container">
                     <div class="filter-group">
                         <span class="filter-label">市场分类:</span>
@@ -409,27 +325,16 @@ if __name__ == "__main__":
     local_videos = load_local_data()
     existing_ids = {v['id'] for v in local_videos}
     
-    all_fetched = []
+    new_my_stock = fetch_youtube_videos("马股")
+    new_us_stock = fetch_youtube_videos("美股")
+    all_fetched = new_my_stock + new_us_stock
     
-    # ─── 任务 1：模糊关键词抓取 ───
-    all_fetched += fetch_youtube_videos("马股")
-    all_fetched += fetch_youtube_videos("美股")
-    
-    # ─── 任务 2：指定大V频道精准追踪（传入评分参数） ───
-    for channel_name, info in TARGET_CHANNELS.items():
-        channel_id = info[0]
-        market_tag = info[1]
-        rating = info[2]  # 获取预设评分
-        all_fetched += fetch_channel_videos(channel_name, channel_id, market_tag, rating)
-    
-    # ─── 统一合并与本地去重数据库 ───
     new_count = 0
     for video in all_fetched:
         if video['id'] not in existing_ids:
             local_videos.append(video)
-            existing_ids.add(video['id'])
             new_count += 1
             
-    print(f"\n📊 本次收网结束：发现了 {new_count} 个未曾录入的新视频，已追加至本地数据库！")
+    print(f"本次抓取结束。发现了 {new_count} 个新视频并已追加到本地。")
     save_local_data(local_videos)
     generate_html(local_videos)

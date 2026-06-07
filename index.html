@@ -37,7 +37,6 @@
             h2 { margin: 0 0 15px 0; font-size: 24px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; color: #111827; }
             .update-time { font-size: 13px; color: var(--text-muted); font-weight: normal; }
             
-            /* 📣 黄金引流推广位样式 */
             .promo-banner {
                 background: var(--promo-bg);
                 color: white;
@@ -69,7 +68,6 @@
             }
             .join-btn:hover { background: #f8fafc; transform: scale(1.03); }
 
-            /* 智能筛选工具栏 */
             .filter-container { display: flex; gap: 20px; flex-wrap: wrap; background: #f0f2f5; padding: 10px 15px; border-radius: 8px; }
             .filter-group { display: flex; align-items: center; gap: 8px; }
             .filter-label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
@@ -91,7 +89,6 @@
                 box-shadow: 0 2px 4px rgba(9, 105, 218, 0.3);
             }
 
-            /* 网格布局与卡片 */
             .container { max-width: 1300px; margin: 25px auto; padding: 0 20px; }
             .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
             @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
@@ -110,14 +107,40 @@
                 box-shadow: 0 8px 16px rgba(0,0,0,0.08); 
             }
             
-            .thumbnail-wrapper { flex-shrink: 0; width: 150px; height: 95px; margin-right: 14px; border-radius: 8px; overflow: hidden; background: #eee; }
+            /* 缩略图外层容器（为了实现角标绝对定位） */
+            .thumbnail-wrapper { position: relative; flex-shrink: 0; width: 150px; height: 95px; margin-right: 14px; border-radius: 8px; overflow: hidden; background: #eee; }
             .thumbnail-wrapper img { width: 100%; height: 100%; object-fit: cover; }
             
+            /* 🔥 动态 NEW 标签微动效样式 */
+            .new-badge {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                background: #cf222e;
+                color: white;
+                font-size: 10px;
+                font-weight: 800;
+                padding: 2px 6px;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                animation: pulse 2s infinite;
+            }
+            @keyframes pulse {
+                0% { opacity: 1; }
+                50% { opacity: 0.7; }
+                100% { opacity: 1; }
+            }
+            
             .video-info { display: flex; flex-direction: column; justify-content: space-between; flex: 1; min-width: 0; }
-            .video-info h3 { margin: 0 0 8px 0; font-size: 14px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .video-info h3 { margin: 0 0 6px 0; font-size: 14px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
             .video-info h3 a { text-decoration: none; color: var(--text-main); }
             .video-info h3 a:hover { color: var(--primary-color); }
             
+            /* ⭐ 评分栏专属样式 */
+            .rating-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; background: #fff8e1; padding: 2px 8px; border-radius: 4px; border: 1px dashed #ffe082; }
+            .rating-label { font-size: 11px; font-weight: 600; color: #b78103; }
+            .rating-value { font-size: 11px; font-weight: 700; color: #d4af37; }
+
             .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 5px; }
             .meta-text { margin: 0; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             
@@ -137,10 +160,9 @@
             <div class="header-content">
                 <h2>
                     <span>🚦 红绿灯导航 · YT股票视频 直通车</span>
-                    <span class="update-time">🔄 更新时间: 2026-06-07 10:50</span>
+                    <span class="update-time">🔄 更新时间: 2026-06-07 11:57</span>
                 </h2>
                 
-                <!-- 📣 引流横幅组件 -->
                 <div class="promo-banner">
                     <div class="promo-text">
                         <div class="promo-title">👥 欢迎加入【SF 趋势跟势交流群】</div>
@@ -152,7 +174,6 @@
                     </div>
                 </div>
                 
-                <!-- 智能筛选栏 -->
                 <div class="filter-container">
                     <div class="filter-group">
                         <span class="filter-label">市场分类:</span>
@@ -176,9 +197,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=8oMozLjFqNY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/8oMozLjFqNY/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=8oMozLjFqNY" target="_blank">Google I/O之後，AI故事變現到未？</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 hkstockAI &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -193,9 +221,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=wSYHs1-Hnl0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/wSYHs1-Hnl0/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=wSYHs1-Hnl0" target="_blank">美股黑色星期五，半导体行情，结束了吗？ #美股 #股市#股市 #半导体 #费城半导体#台积电 #英伟达 #美光科技</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 韭哥爱美股 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -210,9 +245,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=6lqb4gwhCRw" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/6lqb4gwhCRw/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=6lqb4gwhCRw" target="_blank">台指期夜盤重挫</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 投資趣 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -227,9 +269,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=GARdnZdeT-U" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/GARdnZdeT-U/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=GARdnZdeT-U" target="_blank">美股下周报复反弹？ 特斯拉蜻蜓点水？#美股 #NVDA #TSLA #MU #AMD #SOXL #SNDK</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 JohnLu谈股 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -244,9 +293,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=XA2LGhEIWAs" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/XA2LGhEIWAs/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=XA2LGhEIWAs" target="_blank">虽然老鼠仓，不是绝对没办法 #金融 #美股 #btc</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 远山政经 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -261,9 +317,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=Qz1V_gcEgIQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Qz1V_gcEgIQ/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=Qz1V_gcEgIQ" target="_blank">英伟达持仓太狠了！#美股 #美股入门 #美股分析 #美股赚钱 #英伟达 #nvidia</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 一乐到底 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -278,9 +341,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=z_UuXoc3y6A" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/z_UuXoc3y6A/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=z_UuXoc3y6A" target="_blank">欧易美股如何购买教程来了 欧易okx怎么买美股 #美股 #美股入门 #美股分析 #加密货币 #binance 欧易okx美股怎么开户 美股开户步骤okx注册下载 #欧易交易所 #欧易 #美股</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 币圈鱼丸 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -295,9 +365,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=zESWGVP0a7c" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/zESWGVP0a7c/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=zESWGVP0a7c" target="_blank">大陆用如何在欧易okx购买美股教程来了 不用传统券商也能关注热门美股？欧易OKX注册下载＋全球资产布局教程 英伟达、特斯拉还能这样参与？ #欧易交易所 #美股 #加密货币 #欧易</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 币圈鱼丸 &nbsp;&nbsp; 📅 2026-06-07</p>
                     <span class="market-tag tag-us">美股</span>
@@ -309,12 +386,91 @@
             </div>
         </div>
         
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
+            <a href="https://www.youtube.com/watch?v=enLIhSzJg1I" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/enLIhSzJg1I/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=enLIhSzJg1I" target="_blank">回顧黑色星期五暴跌前的快樂，波動季來臨，你做好准備了嗎？ #美股 #黑色星期五 #投資 #美股实盘 #shorts</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 Melody 聊美股 &nbsp;&nbsp; 📅 2026-06-07</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=enLIhSzJg1I" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
+            <a href="https://www.youtube.com/watch?v=T0ssrPwFtPE" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/T0ssrPwFtPE/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=T0ssrPwFtPE" target="_blank">#費城半導體  #美股財報季 #台積電 #信驊  #創意  #聯發科  #世芯 #貿聯 #AI股 #主動型ETF#成長股 #台股 #ai股 6/8台股大盤上車名單參考</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 台股老船長 &nbsp;&nbsp; 📅 2026-06-07</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=T0ssrPwFtPE" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
+            <a href="https://www.youtube.com/watch?v=TmjTW4yECZk" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/TmjTW4yECZk/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=TmjTW4yECZk" target="_blank">美股直播06/06[早盘] 以往涨跌趋势通常有何信号? 看完这集技术信号分析你会跑赢所有算命博主 | 千万别再犯同样错误</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-07</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=TmjTW4yECZk" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/ipL-VVkA5dE/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank">【现实人生】第1303期 大马政局陷入混乱 莱士雅丁表示未经四大酋长同意希盟解散森州议会不合法</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -329,9 +485,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Z2QWru7-skU/hqdefault_live.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank">06 06 2026 第760期：马股！国家队开工！</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 我是雷公 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -346,9 +509,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/WsAkjnHr1Pc/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank">马股大行情NATGATE股价趋势分析，庄家价位在哪里？#马股 #科技股 #natgate</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 TI 懂一点 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -363,9 +533,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/mADXrFB1HyE/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank">市场短期过热之后，终于开始重新定价风险！昨晚美股科技股集体回调，纳斯达克单日跌幅超过4%，很多人第一反应是：是不是N市结束了？#美股 #美股入门 #美股分析 #美股赚钱 #投資</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 一乐到底 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -380,9 +557,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/AxJ_0rFb-10/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank">買美股致富還怒罵「考生混吃等死」 粉筆CEO炫富失敗爆粗口引眾怒急道歉！@ebcCTime #shorts</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 關鍵時刻 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -397,9 +581,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/u7aoQjfM1sk/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank">台股ETFVS台積電績效#友達#群創#台股#美股#台積電#鴻海#力積電#聯電#華邦電</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 投資深淵 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -414,9 +605,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/M2ztdgMXpgk/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank">美股暴跌，强非农+SpaceX双重绞杀！半导体一夜惨烈暴跌10%，击球区不远了！ #techstocks #usstocks #semiconductor #spacex #ratecut #fed</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 老雷财经 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -431,9 +629,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/XBRzqUyEWQI/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank">英伟达不需要内存？订阅频道，观看完整版｜ #投資 #美股 #美股</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 Cici on the way &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -448,9 +653,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DjunmIODIZ8/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank">台指期夜盤暴跌3006點</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 投資趣 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -465,9 +677,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/VmzyfoKFZ1U/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank">星期五美股全線暴跌，你成功逃頂了嗎？是贪婪了吗 #美股 #投資心法 #贪婪和恐惧 #美股为什么暴跌 #股票暴跌#美股暴跌</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 SaveQuant &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -482,9 +701,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/TpzESWyYphc/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank">週一台股剉咧等? 美股收黑「AI遭血洗」! 費半跌10%疫情來最慘 黑色星期一再現? 網友哀號:怕台股血流成河 花旗:股市2008年以來最大泡沫風險｜TVBS新聞 @TVBSNEWS01</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 TVBS NEWS &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -499,9 +725,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=tpsYfBxMfZo" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/tpsYfBxMfZo/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=tpsYfBxMfZo" target="_blank">[马股][投行报告]Petronas Dagangan 报告 (HLIB) June 2026</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 股市章鱼 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -516,9 +749,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=LbMx8Tz_6i4" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/LbMx8Tz_6i4/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=LbMx8Tz_6i4" target="_blank">【韭菜人生】第862期 比特币科技股太空股大暴跌 纳斯达克指数单日跌1121点创纪录</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -533,9 +773,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=jLYF4_CwCKk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/jLYF4_CwCKk/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=jLYF4_CwCKk" target="_blank">割韭菜時間到了？美股崩跌引發恐慌｜20260606 自由觀點｜#shorts</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 自由追新聞 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -550,9 +797,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=xzIyrfulhU0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/xzIyrfulhU0/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=xzIyrfulhU0" target="_blank">非農太強，三大指數下跌！這時候別亂操作. #交易心理 #投資 #股市#投资陷阱 #炒股教学#投資 #美股#财经 #金融 #股票#马股投资 #股市 #领涨 #台股</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 股市老司机 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -567,9 +821,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=LPSgt4tsj6A" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/LPSgt4tsj6A/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=LPSgt4tsj6A" target="_blank">[马股][投行报告]IOI Corp 报告 (HLIB) June 2026</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 股市章鱼 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -584,9 +845,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=pg07FyDajKQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/pg07FyDajKQ/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=pg07FyDajKQ" target="_blank">6月初美股科技股集体承压，是AI估值消化？还是下一条万亿级赛道正在浮出水面？#美股 #特斯拉 #spacex #投資</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 AI财富领航 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -601,9 +869,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=Lwz6AZs36xs" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Lwz6AZs36xs/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=Lwz6AZs36xs" target="_blank">你真的知道麦当劳的商业模式吗？ #美股 #美股分析</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 Mia Tradin聊美股 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -618,9 +893,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=W2YjJBSko28" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/W2YjJBSko28/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=W2YjJBSko28" target="_blank">週五美股重摔！台指期夜盤崩3006點 黑色星期一防「斷頭」－民視新聞</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 民視新聞網 Formosa TV News network &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -635,9 +917,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=lPFLzAAtk0I" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/lPFLzAAtk0I/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=lPFLzAAtk0I" target="_blank">週五美股重摔!台指期夜盤崩3006點 黑色星期一防&quot;斷頭&quot;－民視新聞</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 民視新聞網 Formosa TV News network &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -652,9 +941,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=_XoosXb_J2Q" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/_XoosXb_J2Q/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=_XoosXb_J2Q" target="_blank">AI直接帮你炒美股？？？这个简直太夯了#ai #美股</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 加密未来CryptoFuture &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -669,9 +965,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=hg1d1M-P_os" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/hg1d1M-P_os/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=hg1d1M-P_os" target="_blank">0605【JASON美股实盘直播】直播</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 JASON美股实盘直播 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -686,9 +989,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=6d8v__6TrXY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/6d8v__6TrXY/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=6d8v__6TrXY" target="_blank">美股、台指期全面重挫　巴逆逆：「賠了1只勞力士」｜鏡報</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 鏡報  &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -703,9 +1013,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=vMT_rzDmfiE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/vMT_rzDmfiE/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=vMT_rzDmfiE" target="_blank">美股黄金暴跌，美元暴涨，究竟谁是那个黑天鹅？</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 蒙面财经MaskFinance &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -720,9 +1037,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=9LQJvKPlbZ0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/9LQJvKPlbZ0/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=9LQJvKPlbZ0" target="_blank">KS看股 | 马股KLSE分享 | 6-6-2026 | 看看国际和马股图标 | 小心! 美股大跌! | KLCI NASDAQ S&amp;P HKEX TESLA NVIDIA BYD</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 Trading with KS &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -737,9 +1061,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=Wfi0ba19YkM" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Wfi0ba19YkM/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=Wfi0ba19YkM" target="_blank">亲历海外市场：美股大跌后我的资产配置思路朋友们，周五美股全线走跌，不少人瞬间心慌。放眼当下，全球经济整体承压，各类不确定性接连浮出水面。 美联储政策摇摆#美股 #全球经济 #资产配置 #投资理财干货</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 美国审计CIA德州朱莉 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -754,9 +1085,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=F9bNUNw3F18" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/F9bNUNw3F18/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=F9bNUNw3F18" target="_blank">【SUB】美股大跌凶兆？日本美軍不妙【#新聞大白話】20260606#字幕版 #美股 #駐日美軍 #川普 #高市早苗</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 新聞大白話 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -771,9 +1109,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=_z3_MYVNbFA" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/_z3_MYVNbFA/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=_z3_MYVNbFA" target="_blank">6月5日美股：標普500跌2.6%，市場點部署？</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 hkstockAI &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -788,9 +1133,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=PG_dJAZ7WTk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/PG_dJAZ7WTk/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=PG_dJAZ7WTk" target="_blank">美股重挫、台指期夜盤也崩3006點！投顧：台股恐一路調整到「這時」｜🔴0606 LIVE直播｜三立新聞LIVE</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 三立新聞LIVE &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -805,9 +1157,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=uCmQiiZmg_w" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/uCmQiiZmg_w/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=uCmQiiZmg_w" target="_blank">美股大跌 Nasdaq大插 可否搏😏/NVDA幾時撈底 食大茶飯🤑/MRVL可否追貨😆/AVGO MU咪亂接飛刀😅/SpaceX上市 美股能否爆升💥/海力士 三星 小心懸崖跳海😬/2026-06-06</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 譚紹興頻道-Ricky Tam's Channel &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -822,9 +1181,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=T_O4kaDCKy4" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/T_O4kaDCKy4/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=T_O4kaDCKy4" target="_blank">習近平 川普 金融脫鉤 🚨美股大屠殺！非農爆表引爆重啟加息恐慌，大佬集體唱空逃命！ #美股 #加息 #期權 #美股 #標普</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 美股數據張老師 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -839,9 +1205,16 @@
         <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=xF4EaDSVSkM" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/xF4EaDSVSkM/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=xF4EaDSVSkM" target="_blank">台股崩盤美股大跌仁寶vs泰金寶績效#好德#尚茂#友達#群創#台股#美股#台積電#鴻海#力積電#聯電#華邦電#強茂#美股大跌#台股崩盤</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 投資深淵 &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-us">美股</span>
@@ -856,9 +1229,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=YlmJSRnxivE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/YlmJSRnxivE/hqdefault.jpg" alt="Thumbnail">
+                <span class="new-badge">NEW</span>
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=YlmJSRnxivE" target="_blank">打工族别碰银行股！Maybank 很稳？最怕“基本面稳但不动”的股票</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 Andy Yew &nbsp;&nbsp; 📅 2026-06-06</p>
                     <span class="market-tag tag-my">马股</span>
@@ -873,9 +1253,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/4Qjvf5kh2yY/hqdefault.jpg" alt="Thumbnail">
+                
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank">数据中心瓶颈不是芯片？这家马股正手握着命门</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 GoLET投资空间 &nbsp;&nbsp; 📅 2026-06-05</p>
                     <span class="market-tag tag-my">马股</span>
@@ -890,9 +1277,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/ct0LQ8jBCEQ/hqdefault.jpg" alt="Thumbnail">
+                
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank">【韭菜人生】第860期 罪恶税盆满钵满 云顶赌场税5年贡献150亿 啤酒厂5年缴税130亿</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-05</p>
                     <span class="market-tag tag-my">马股</span>
@@ -907,9 +1301,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/N9PSZhZYD1I/hqdefault.jpg" alt="Thumbnail">
+                
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank">5.6.2026 - 马股快讯 (又有一家公司将脱离PN17)</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 Bursa News (马股-报报看) &nbsp;&nbsp; 📅 2026-06-05</p>
                     <span class="market-tag tag-my">马股</span>
@@ -924,9 +1325,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/j21fKMQeLn0/hqdefault.jpg" alt="Thumbnail">
+                
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank">KS看股 | 马股 KLSE BURSA 分享 | 5-6-2026 | 马股反弹! KLCI涨10点! | 建筑和房产板块跌 | UTDPLT SCGBHD VITROX  SLVEST</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 Trading with KS &nbsp;&nbsp; 📅 2026-06-05</p>
                     <span class="market-tag tag-my">马股</span>
@@ -941,9 +1349,16 @@
         <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DaLAIHJ_sQU/hqdefault.jpg" alt="Thumbnail">
+                
             </a>
             <div class="video-info">
                 <h3><a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank">马股klse止跌背后的真正推手 #klse #trading #klci #投資 #股哥说股 #bursamalaysia #马股</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
                 <div class="meta-row">
                     <p class="meta-text">👤 股哥说股@jeff &nbsp;&nbsp; 📅 2026-06-05</p>
                     <span class="market-tag tag-my">马股</span>
@@ -951,6 +1366,342 @@
                 <div class="card-footer">
                     <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
                     <a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=9jFqrZkI98Q" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/9jFqrZkI98Q/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=9jFqrZkI98Q" target="_blank">市场面临三重考验。【2026-06-05】</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=9jFqrZkI98Q" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=YoePR6yfqzs" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/YoePR6yfqzs/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=YoePR6yfqzs" target="_blank">美股直播06/05[复盘] 一路按照公式做空 爽吗? 为何暴跌?何时算回调到位? 加息预期, 中东谈判,非农数据 等周五分析总汇</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=YoePR6yfqzs" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-05">
+            <a href="https://www.youtube.com/watch?v=7WdbmJSqJmA" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/7WdbmJSqJmA/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=7WdbmJSqJmA" target="_blank">美股直播06/05[早盘] 为何夜盘暴跌?和昨天一样, 关注这个逻辑判断盘中多头何时到来| 非农, SpaceX, 中东 等周五新闻</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-05</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=7WdbmJSqJmA" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-04">
+            <a href="https://www.youtube.com/watch?v=v8l4kPon3hA" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/v8l4kPon3hA/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=v8l4kPon3hA" target="_blank">这2天回调都是前10天就已预告了，今天守着打了英伟达大野牛，其他会员也有做其他的，明天继续打野牛</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-04</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=v8l4kPon3hA" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-04">
+            <a href="https://www.youtube.com/watch?v=uch42ETlM5k" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/uch42ETlM5k/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=uch42ETlM5k" target="_blank">快进快出，前几天说冲几下要注意回踩，今天回踩来了，打只野兔</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-04</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=uch42ETlM5k" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-04">
+            <a href="https://www.youtube.com/watch?v=9T68QPWnXFw" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/9T68QPWnXFw/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=9T68QPWnXFw" target="_blank">美股：突然挤兑，就没戏唱了。【2026-06-04】</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-04</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=9T68QPWnXFw" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-04">
+            <a href="https://www.youtube.com/watch?v=P60gHUGhx9c" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/P60gHUGhx9c/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=P60gHUGhx9c" target="_blank">美股直播06/04[复盘] GOOGL, NVDA 利好| 今天的大反转早盘提醒的多头触发点逻辑如何? 中东, 美联储发言等周四新闻总汇</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-04</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=P60gHUGhx9c" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-04">
+            <a href="https://www.youtube.com/watch?v=optz-7HnJSA" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/optz-7HnJSA/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=optz-7HnJSA" target="_blank">美股直播06/04[早盘] 如何不用算命就能吃到这波空头?同理, 如何不用算命就判断何时多头回归? 半导体, 中东 等周四新闻</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-04</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=optz-7HnJSA" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-03">
+            <a href="https://www.youtube.com/watch?v=DGI5ph49XdE" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/DGI5ph49XdE/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=DGI5ph49XdE" target="_blank">美股：大盘会高台跳水吗，博通财报后暴跌。【2026-06-03】</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-03</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=DGI5ph49XdE" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-02">
+            <a href="https://www.youtube.com/watch?v=JsP69VXjass" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/JsP69VXjass/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=JsP69VXjass" target="_blank">四处寻野味，标准入场，今天300斤野猪一只，明天继续打野牛</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-02</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=JsP69VXjass" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-02">
+            <a href="https://www.youtube.com/watch?v=zmD-AgJPs84" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/zmD-AgJPs84/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=zmD-AgJPs84" target="_blank">黄仁勋：这只股还将涨400% 【2026-06-02】</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-02</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=zmD-AgJPs84" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-01">
+            <a href="https://www.youtube.com/watch?v=do7pOS1NCWw" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/do7pOS1NCWw/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=do7pOS1NCWw" target="_blank">今天野牛打晚了一点，不然要上1000斤，早就等着它这只大野牛</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-01</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=do7pOS1NCWw" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-05-31">
+            <a href="https://www.youtube.com/watch?v=_wqsevj_bjs" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/_wqsevj_bjs/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=_wqsevj_bjs" target="_blank">会费调整，在x上更新帖子，一只看好的股票，记得关注，半导体我不会随便入场了，真正的大行情已经走过大半</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-05-31</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=_wqsevj_bjs" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-05-20">
+            <a href="https://www.youtube.com/watch?v=smAJaPHOg5E" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/smAJaPHOg5E/hqdefault.jpg" alt="Thumbnail">
+                
+            </a>
+            <div class="video-info">
+                <h3><a href="https://www.youtube.com/watch?v=smAJaPHOg5E" target="_blank">它下了血本了，大家小心。【2026-05-20】</a></h3>
+                
+                <div class="rating-row">
+                    <span class="rating-label">🎯 可信度评分:</span>
+                    <span class="rating-value">⭐ ⭐ ⭐ (系统推荐)</span>
+                </div>
+
+                <div class="meta-row">
+                    <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-05-20</p>
+                    <span class="market-tag tag-us">美股</span>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=smAJaPHOg5E" target="_blank" class="play-btn">▶ 观看视频</a>
                 </div>
             </div>
         </div>
