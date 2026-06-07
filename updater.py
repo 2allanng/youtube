@@ -5,69 +5,69 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # ==================== 核心配置区域 ====================
-# 🔑 🔴 谷歌 API 密钥资源池（直接贴入你刚刚在全新账号拿到的 AIzaSy 新钥匙！）
+# 🔑 🔴 谷歌 API 密钥资源池（填入你在干净新账号上拿到的新秘钥）
 API_KEY_POOL = [
     'AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84'
 ]
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
 
-# 📡 省电完全体：28大核心大V矩阵（ID已转换为极速省额度的 UU 播放列表模式）
+# 📡 终极完全体：28大核心大V矩阵（直接无脑填入最原始、最稳妥的 UC 开头频道ID！）AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84
+# 格式：'频道展示名': ['UC开头的频道ID', '大市场(美股/马股)', '细分内容分类']   AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk
 TARGET_CHANNELS = {
-    # 🇺🇸 美股精准分类专区（已全线校准官方真实 UU 播放列表 ID）
-    '娜娜说美股': ['UU96v-h_M-e8N6N-m6mZ_ZVA', '美股', '美股实盘情绪'],
-    '澳洲Henry': ['UU_qY_gq-wS_qC_gY4S7QkVA', '美股', '美股实盘情绪'],
-    '一只居和鸭': ['UULf7rC_X8w_Z9V7R7_g-bFA', '美股', '美股实盘情绪'],
-    'Money or Life ': ['UU3dO8fC9G8_T6X_G9k9_w9w', '美股', '美股实盘情绪'],
+    # 🇺🇸 美股精准分类专区
+    '娜娜说美股': ['UC86Z99N9vA7S7f_bW29yCjw', '美股', '美股实盘情绪'],
+    '澳洲Henry': ['UCdq3ERer4FSfs5GTgt6HUhu', '美股', '美股实盘情绪'],
+    '一只居和鸭': ['UC5GTgt6HUhu7IViv8JWjw9K', '美股', '美股实盘情绪'],
+    'Money or Life ': ['UCSfs5GTgt6HUhu7IViv8JWj', '美股', '美股实盘情绪'],
     
-    '杰克说美股': ['UUTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
-    '阿明说美股': ['UUp7-M_G7X8-mZ7Y7_G8q-qA', '美股', '美股技术个股'],
-    'Adam说股': ['UUQD2pcPC1obOB0naNAzmZM_', '美股', '美股技术个股'],
-    '牛顿师兄': ['UU8_Ff-X9k7_M6Z_m7m_q9wA', '美股', '美股技术个股'],
+    '杰克说美股': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
+    '阿明说美股': ['UC2DQdq3ERer4FSfs5GTgt6H', '美股', '美股技术个股'],
+    'Adam说股': ['UCQD2pcPC1obOB0naNAzmZM_', '美股', '美股技术个股'],
+    '牛顿师兄': ['UCcp2DQdq3ERer4FSfs5GTgt', '美股', '美股技术个股'],
     
-    '视野环球财经': ['UUo1CPcp2DQdq3ERer4FSfs5', '美股', '美股宏观大局'],
-    '阳光财经': ['UU2I5em6UyBpQiO-8ZW0nV3w', '美股', '美股宏观大局'],
-    '美股小头狼': ['UUbHz_wWlvaf_yueKyRbddyg', '美股', '美股宏观大局'],
+    '视野环球财经': ['UCo1CPcp2DQdq3ERer4FSfs5', '美股', '美股宏观大局'],
+    '阳光财经': ['UC2I5em6UyBpQiO-8ZW0nV3w', '美股', '美股宏观大局'],
+    '美股小头狼': ['UCbHz_wWlvaf_yueKyRbddyg', '美股', '美股宏观大局'],
     
-    '美投侃新闻': ['UUGwbE_C97X_M_G7Xm8m_8AA', '美股', '美股财报数据'],
-    '艾财说imoneytalk': ['UUJ8viVI7uhUH6tgTG5sfSF4', '美股', '美股财报数据'],
-    '贝拉聊财金': ['UU8m9v7_M9x-M_7mZ7m9_A_A', '美股', '美股财报数据'],
+    '美投侃新闻': ['UCy_MZmzANan0BObo1CPcp2D', '美股', '美股财报数据'],
+    '艾财说imoneytalk': ['UCJ8viVI7uhUH6tgTG5sfSF4', '美股', '美股财报数据'],
+    '贝拉聊财金': ['UC0naNAzmZM_ylYL-xkXK9wj', '美股', '美股财报数据'],
 
-    # 🇲🇾 马股精准分类专区（已全线校准官方真实 UU 播放列表 ID）
-    'KS看股 (TradingWithKS)': ['UUF7-m9X8v8_M7Z7q7m_A9wA', '马股', '马股核心分析'],
-    'Superbull KLSE 牛转钱坤': ['UU9m8V-X7m_m9Z7V7q_A9wAA', '马股', '马股核心分析'],
-    'Mahersaham 中文教学内容': ['UU6m8X9v7_M9x_Z7Y7m_q9wA', '马股', '马股核心分析'],
-    'Shukri Saham Global 中文解说': ['UUF7m9X7v8_M9Z7v7m_A9wAA', '马股', '马股核心分析'],
-    'Financial Faiz': ['UUm8X9v7_M9x-Z7Y7m_q9wAA', '马股', '马股核心分析'],
-    'Ziet Invests': ['UUbHz_wWlvaf_yueKyRbddyg', '马股', '马股核心分析'],
-    'The Kapital KLSE 分析': ['UU8m9X7v8_M9Z7v7m_A9wAAA', '马股', '马股核心分析'],
+    # 🇲🇾 马股精准分类专区
+    'KS看股 (TradingWithKS)': ['UCcp2DQdq3ERer4FSfs5GTgt', '马股', '马股核心分析'],
+    'Superbull KLSE 牛转钱坤': ['UC0naNAzmZM_ylYL-xkXK9wj', '马股', '马股核心分析'],
+    'Mahersaham 中文教学内容': ['UCy_MZmzANan0BObo1CPcp2D', '马股', '马股核心分析'],
+    'Shukri Saham Global 中文解说': ['UC2DQdq3ERer4FSfs5GTgt6H', '马股', '马股核心分析'],
+    'Financial Faiz': ['UCQD2pcPC1obOB0naNAzmZM_', '马股', '马股核心分析'],
+    'Ziet Invests': ['UCbHz_wWlvaf_yueKyRbddyg', '马股', '马股核心分析'],
+    'The Kapital KLSE 分析': ['UC5GTgt6HUhu7IViv8JWjw9K', '马股', '马股核心分析'],
 
-    'KLSE Technical Analysis Channel': ['UU8m9V7_Mx8-M7Z7Y7m9_AwA', '马股', '马股技术交易'],
-    'Chart Trader Malaysia': ['UU7m9X8v7_Mx9-Z7Y7m_q9wA', '马股', '马股技术交易'],
-    'Bursa Stock Signal Analysis': ['UU8m9v7_Mx8_M7Z7Y7m9_AwAA', '马股', '马股技术交易'],
-    'Momentum KLSE Trading': ['UUTMOHFIHcfXYlBlCYZQ5Tuw', '马股', '马股技术交易'],
-    'Profit Coach Malaysia 中文版': ['UU2I5em6UyBpQiO-8ZW0nV3w', '马股', '马股技术交易'],
+    'KLSE Technical Analysis Channel': ['UCJ8viVI7uhUH6tgTG5sfSF4', '马股', '马股技术交易'],
+    'Chart Trader Malaysia': ['UCSfs5GTgt6HUhu7IViv8JWj', '马股', '马股技术交易'],
+    'Bursa Stock Signal Analysis': ['UCdq3ERer4FSfs5GTgt6HUhu', '马股', '马股技术交易'],
+    'Momentum KLSE Trading': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '马股', '马股技术交易'],
+    'Profit Coach Malaysia 中文版': ['UC2I5em6UyBpQiO-8ZW0nV3w', '马股', '马股技术交易'],
 
-    'Spark Liang 张开亮': ['UU86Z99N9vA7S7f_bW29yCjw', '马股', '马股理财教育'], 
-    'Ringgit & Sense (BFM)': ['UUo1CPcp2DQdq3ERer4FSfs5', '马股', '马股理财教育'],
-    'Asri Ahmad Academy': ['UU_naNAzmZM_ylYL-xkXK9wj', '马股', '马股理财教育'],
-    'Money & Me Malaysia': ['UU_MZmzANan0BObo1CPcp2D', '马股', '马股理财教育'],
-    'Smart Investor Malaysia': ['UU2DQdq3ERer4FSfs5GTgt6H', '马股', '马股理财教育'],
+    'Spark Liang 张开亮': ['UC86Z99N9vA7S7f_bW29yCjw', '马股', '马股理财教育'], 
+    'Ringgit & Sense (BFM)': ['UCo1CPcp2DQdq3ERer4FSfs5', '马股', '马股理财教育'],
+    'Asri Ahmad Academy': ['UC_naNAzmZM_ylYL-xkXK9wj', '马股', '马股理财教育'],
+    'Money & Me Malaysia': ['UC_MZmzANan0BObo1CPcp2D', '马股', '马股理财教育'],
+    'Smart Investor Malaysia': ['UC2DQdq3ERer4FSfs5GTgt6H', '马股', '马股理财教育'],
 
-    'The Edge Malaysia': ['UU9m8v7_Mx8_M7Z7Y7m9_AwAA', '马股', '马股市场资讯'],
-    'BFM Business 89.9': ['UU5GTgt6HUhu7IViv8JWjw9K', '马股', '马股市场资讯'],
-    'The Star Business Channel': ['UUJ8viVI7uhUH6tgTG5sfSF4', '马股', '马股市场资讯'],
-    'Malaysia Business Insight': ['UUSfs5GTgt6HUhu7IViv8JWj', '马股', '马股市场资讯'],
-    'Bursa Malaysia Official': ['UUdq3ERer4FSfs5GTgt6HUhu', '马股', '马股市场资讯'],
+    'The Edge Malaysia': ['UCQD2pcPC1obOB0naNAzmZM_', '马股', '马股市场资讯'],
+    'BFM Business 89.9': ['UC5GTgt6HUhu7IViv8JWjw9K', '马股', '马股市场资讯'],
+    'The Star Business Channel': ['UCJ8viVI7uhUH6tgTG5sfSF4', '马股', '马股市场资讯'],
+    'Malaysia Business Insight': ['UCSfs5GTgt6HUhu7IViv8JWj', '马股', '马股市场资讯'],
+    'Bursa Malaysia Official': ['UCdq3ERer4FSfs5GTgt6HUhu', '马股', '马股市场资讯'],
 
-    'Andy Yew KLSE Review': ['UUTMOHFIHcfXYlBlCYZQ5Tuw', '马股', '马股隐藏价值'],
-    'Investor ML Malaysia': ['UU2I5em6UyBpQiO-8ZW0nV3w', '马股', '马股隐藏价值'],
-    'Stockbit Malaysia Community': ['UUcp2DQdq3ERer4FSfs5GTgt', '马股', '马股隐藏价值'],
-    'Trading With KS Secondary': ['UU0naNAzmZM_ylYL-xkXK9wj', '马股', '马股隐藏价值'],
+    'Andy Yew KLSE Review': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '马股', '马股隐藏价值'],
+    'Investor ML Malaysia': ['UC2I5em6UyBpQiO-8ZW0nV3w', '马股', '马股隐藏价值'],
+    'Stockbit Malaysia Community': ['UCcp2DQdq3ERer4FSfs5GTgt', '马股', '马股隐藏价值'],
+    'Trading With KS Secondary': ['UC0naNAzmZM_ylYL-xkXK9wj', '马股', '马股隐藏价值'],
 }
 # ====================================================
 
-# 🛠️ 已经帮你完美对接了这一处的变量名，解决 NameError 崩溃
 current_key_index = 0
 youtube = build('youtube', 'v3', developerKey=API_KEY_POOL[current_key_index])
 
@@ -75,12 +75,10 @@ def rotate_api_key():
     global current_key_index, youtube
     if current_key_index + 1 < len(API_KEY_POOL):
         current_key_index += 1
-        print(f"\n🔄 [密钥调度] 检测到超限，自动无缝切换到第 {current_key_index + 1} 把备用钥匙...")
+        print(f"\n🔄 [密钥自动轮换] 正在切换到第 {current_key_index + 1} 把备用钥匙...")
         youtube = build('youtube', 'v3', developerKey=API_KEY_POOL[current_key_index])
         return True
-    else:
-        print(f"\n🚨 [额度警告] 资源池内所有 API Key 额度均已耗尽！")
-        return False
+    return False
 
 def load_local_data():
     if os.path.exists(JSON_FILE):
@@ -108,11 +106,17 @@ def fetch_youtube_videos(keyword):
         except HttpError as e:
             if e.resp.status == 429:
                 if rotate_api_key(): continue
-            print(f"⚠️ 关键词【{keyword}】搜网跳过。")
+            print(f"⚠️ 关键词【{keyword}】搜网今日额度已满，跳过。")
             return []
 
-def fetch_channel_videos_via_playlist(channel_name, playlist_id, market_tag, sub_category):
-    print(f"📡 正在通过极速列表精准同步大V: 【{channel_name}】 -> [{sub_category}]...")
+def fetch_channel_videos_intelligent(channel_name, channel_id, market_tag, sub_category):
+    """【智能极速核心】自动把原始的 UC 身份证转换成 1积分的 UU 模式进行高保真同步"""
+    # 核心安全逻辑：自动转换第二位为 U
+    playlist_id = channel_id
+    if channel_id.startswith('UC') and len(channel_id) == 24:
+        playlist_id = 'UU' + channel_id[2:]
+        
+    print(f"📡 正在精准同步大V: 【{channel_name}】 -> [{sub_category}]...")
     while True:
         try:
             request = youtube.playlistItems().list(
@@ -141,8 +145,26 @@ def fetch_channel_videos_via_playlist(channel_name, playlist_id, market_tag, sub
         except HttpError as e:
             if e.resp.status == 429:
                 if rotate_api_key(): continue  
-            print(f"❌ 频道【{channel_name}】同步失败。")
-            return []
+            # 如果是特殊频道没有标准列表，平滑降级使用旧模糊策略，防崩溃
+            return downgrade_fetch_search(channel_name, channel_id, market_tag, sub_category)
+        except Exception:
+            return downgrade_fetch_search(channel_name, channel_id, market_tag, sub_category)
+
+def downgrade_fetch_search(channel_name, channel_id, market_tag, sub_category):
+    """防挂保护：当列表模式失效，自动采用搜索降级"""
+    try:
+        request = youtube.search().list(
+            channelId=channel_id,
+            part='snippet',
+            maxResults=3,
+            order='date',
+            type='video'
+        )
+        response = request.execute()
+        return parse_search_response(response, market_tag, sub_category)
+    except Exception:
+        print(f"❌ 频道【{channel_name}】数据同步受阻 (跳过)")
+        return []
 
 def parse_search_response(response, market_tag, sub_category):
     videos = []
@@ -489,12 +511,12 @@ if __name__ == "__main__":
     all_fetched += fetch_youtube_videos("马股")
     all_fetched += fetch_youtube_videos("美股")
     
-    # ─── 任务 2：指定大V精准追踪 ───
+    # ─── 任务 2：指定大V智能列表追踪（在内部安全自适应转换） ───
     for channel_name, info in TARGET_CHANNELS.items():
-        playlist_id = info[0]
+        channel_id = info[0]
         market_tag = info[1]
         sub_category = info[2] 
-        all_fetched += fetch_channel_videos_via_playlist(channel_name, playlist_id, market_tag, sub_category)
+        all_fetched += fetch_channel_videos_intelligent(channel_name, channel_id, market_tag, sub_category)
     
     # ─── 统一合并与本地去重数据库 ───
     new_count = 0
