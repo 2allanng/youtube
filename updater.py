@@ -5,14 +5,14 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # ==================== 核心配置区域 ====================
-# 🔑 🔴 谷歌 API 密钥资源池（记得确保这里是你的新干净钥匙！）
+# 🔑 🔴 谷歌 API 密钥资源池（已锁定你的满血新钥匙）
 API_KEY_POOL = [
     'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'
 ]
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
 
-# 📡 精简化完全体：28大核心大V矩阵（取消细分赛道，回归纯粹大市场归类）
+# 📡 精简化完全体：28大核心大V矩阵（回归纯粹大市场归类）
 TARGET_CHANNELS = {
     # 🇺🇸 美股精准分类专区
     '娜娜说美股': ['UC86Z99N9vA7S7f_bW29yCjw', '美股'],
@@ -265,7 +265,7 @@ def generate_html(video_list):
             .promo-title {{ font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }}
             .promo-sub {{ font-size: 12px; color: #e0f2fe; opacity: 0.9; }}
             .promo-action {{ display: flex; align-items: center; gap: 10px; }}
-            .promo-contact {{ font-size: 14px; background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
+            .promo-contact {{ font-size: 14px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
             .join-btn {{
                 background: #ffffff;
                 color: #1e3a8a;
@@ -278,26 +278,26 @@ def generate_html(video_list):
             }}
             .join-btn:hover {{ background: #f8fafc; transform: scale(1.02); }}
 
-            /* 🌟 全新精简版导航条：大按钮一键直达 */
+            /* 🌟 精简版导航条：大国旗按钮一键直达 */
             .filter-container {{ 
                 display: flex; 
                 justify-content: center; 
-                gap: 15px; 
+                gap: 20px; 
                 background: #f0f2f5; 
-                padding: 10px; 
+                padding: 12px; 
                 border-radius: 8px; 
             }}
             .filter-market-btn {{
                 background: var(--card-bg);
                 border: 1px solid var(--border-color);
-                padding: 8px 25px;
+                padding: 10px 35px;
                 border-radius: 6px;
                 cursor: pointer;
-                font-size: 14px;
-                font-weight: 600;
+                font-size: 15px;
+                font-weight: 700;
                 display: flex;
                 align-items: center;
-                gap: 8px;
+                gap: 10px;
                 transition: all 0.2s;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.04);
             }}
@@ -306,7 +306,7 @@ def generate_html(video_list):
                 background: var(--primary-color);
                 color: white;
                 border-color: var(--primary-color);
-                box-shadow: 0 4px 10px rgba(9, 105, 218, 0.3);
+                box-shadow: 0 4px 12px rgba(9, 105, 218, 0.35);
             }}
 
             .container {{ max-width: 1400px; margin: 20px auto; padding: 0 20px; }}
@@ -384,9 +384,9 @@ def generate_html(video_list):
                 </div>
                 
                 <div class="filter-container" id="marketGroup">
-                    <button class="filter-market-btn active" onclick="filterMarket('全部', this)">⭐ 核心全部</button>
-                    <button class="filter-market-btn" onclick="filterMarket('马股', this)">🇲🇾 马股专区</button>
-                    <button class="filter-market-btn" onclick="filterMarket('美股', this)">🇺🇸 美股专区</button>
+                    <button class="filter-market-btn active" onclick="filterMarket('全部', this)">🌍 核心全部</button>
+                    <button class="filter-market-btn" onclick="filterMarket('马股', this)">🇲🇾 马来西亚国旗+马股</button>
+                    <button class="filter-market-btn" onclick="filterMarket('美股', this)">🇺🇸 美国国旗+美股</button>
                 </div>
             </div>
         </div>
@@ -449,7 +449,6 @@ if __name__ == "__main__":
     new_count = 0
     for video in all_fetched:
         if video['id'] in existing_ids:
-            # 兼容旧数据格式更新
             for lv in local_videos:
                 if lv['id'] == video['id']:
                     lv['keyword'] = video['keyword']
