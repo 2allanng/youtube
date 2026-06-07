@@ -4,11 +4,8 @@ import datetime
 from googleapiclient.discovery import build
 
 # ==================== 核心配置区域 ====================
-# 🔑 🔴 谷歌 API 密钥资源池（支持无限添加，额度用尽自动切下一把）
-API_KEY_POOL = [
-    'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk',  # 你的第一把钥匙
-    'AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84' # 你的第二把钥匙（记得把这行中文删掉）
-]
+# 🔴 你的专属谷歌钥匙
+API_KEY = 'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'  
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
 
