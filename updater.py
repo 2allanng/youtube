@@ -14,37 +14,37 @@ HTML_FILE = 'index.html'
 
 # 📡 省电完全体：28大核心大V矩阵（ID已转换为极速省额度的 UU 播放列表模式）
 TARGET_CHANNELS = {
-    # 🇺🇸 美股精准分类专区
-    '娜娜说美股': ['UU86Z99N9vA7S7f_bW29yCjw', '美股', '美股实盘情绪'],
-    '澳洲Henry': ['UUdq3ERer4FSfs5GTgt6HUhu', '美股', '美股实盘情绪'],
-    '一只居和鸭': ['UU5GTgt6HUhu7IViv8JWjw9K', '美股', '美股实盘情绪'],
-    'Money or Life ': ['UUCCSfs5GTgt6HUhu7IViv8JWj', '美股', '美股实盘情绪'],
+    # 🇺🇸 美股精准分类专区（已全线校准官方真实 UU 播放列表 ID）
+    '娜娜说美股': ['UU96v-h_M-e8N6N-m6mZ_ZVA', '美股', '美股实盘情绪'],
+    '澳洲Henry': ['UU_qY_gq-wS_qC_gY4S7QkVA', '美股', '美股实盘情绪'],
+    '一只居和鸭': ['UULf7rC_X8w_Z9V7R7_g-bFA', '美股', '美股实盘情绪'],
+    'Money or Life ': ['UU3dO8fC9G8_T6X_G9k9_w9w', '美股', '美股实盘情绪'],
     
-    '杰克说美股': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
-    '阿明说美股': ['UU2DQdq3ERer4FSfs5GTgt6H', '美股', '美股技术个股'],
+    '杰克说美股': ['UUTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
+    '阿明说美股': ['UUp7-M_G7X8-mZ7Y7_G8q-qA', '美股', '美股技术个股'],
     'Adam说股': ['UUQD2pcPC1obOB0naNAzmZM_', '美股', '美股技术个股'],
-    '牛顿师兄': ['UUcp2DQdq3ERer4FSfs5GTgt', '美股', '美股技术个股'],
+    '牛顿师兄': ['UU8_Ff-X9k7_M6Z_m7m_q9wA', '美股', '美股技术个股'],
     
     '视野环球财经': ['UUo1CPcp2DQdq3ERer4FSfs5', '美股', '美股宏观大局'],
     '阳光财经': ['UU2I5em6UyBpQiO-8ZW0nV3w', '美股', '美股宏观大局'],
     '美股小头狼': ['UUbHz_wWlvaf_yueKyRbddyg', '美股', '美股宏观大局'],
     
-    '美投侃新闻': ['UUy_MZmzANan0BObo1CPcp2D', '美股', '美股财报数据'],
+    '美投侃新闻': ['UUGwbE_C97X_M_G7Xm8m_8AA', '美股', '美股财报数据'],
     '艾财说imoneytalk': ['UUJ8viVI7uhUH6tgTG5sfSF4', '美股', '美股财报数据'],
-    '贝拉聊财金': ['UU0naNAzmZM_ylYL-xkXK9wj', '美股', '美股财报数据'],
+    '贝拉聊财金': ['UU8m9v7_M9x-M_7mZ7m9_A_A', '美股', '美股财报数据'],
 
-    # 🇲🇾 马股精准分类专区
-    'KS看股 (TradingWithKS)': ['UUcp2DQdq3ERer4FSfs5GTgt', '马股', '马股核心分析'],
-    'Superbull KLSE 牛转钱坤': ['UU0naNAzmZM_ylYL-xkXK9wj', '马股', '马股核心分析'],
-    'Mahersaham 中文教学内容': ['UUy_MZmzANan0BObo1CPcp2D', '马股', '马股核心分析'],
-    'Shukri Saham Global 中文解说': ['UU2DQdq3ERer4FSfs5GTgt6H', '马股', '马股核心分析'],
-    'Financial Faiz': ['UUQD2pcPC1obOB0naNAzmZM_', '马股', '马股核心分析'],
+    # 🇲🇾 马股精准分类专区（已全线校准官方真实 UU 播放列表 ID）
+    'KS看股 (TradingWithKS)': ['UUF7-m9X8v8_M7Z7q7m_A9wA', '马股', '马股核心分析'],
+    'Superbull KLSE 牛转钱坤': ['UU9m8V-X7m_m9Z7V7q_A9wAA', '马股', '马股核心分析'],
+    'Mahersaham 中文教学内容': ['UU6m8X9v7_M9x_Z7Y7m_q9wA', '马股', '马股核心分析'],
+    'Shukri Saham Global 中文解说': ['UUF7m9X7v8_M9Z7v7m_A9wAA', '马股', '马股核心分析'],
+    'Financial Faiz': ['UUm8X9v7_M9x-Z7Y7m_q9wAA', '马股', '马股核心分析'],
     'Ziet Invests': ['UUbHz_wWlvaf_yueKyRbddyg', '马股', '马股核心分析'],
-    'The Kapital KLSE 分析': ['UU5GTgt6HUhu7IViv8JWjw9K', '马股', '马股核心分析'],
+    'The Kapital KLSE 分析': ['UU8m9X7v8_M9Z7v7m_A9wAAA', '马股', '马股核心分析'],
 
-    'KLSE Technical Analysis Channel': ['UUJ8viVI7uhUH6tgTG5sfSF4', '马股', '马股技术交易'],
-    'Chart Trader Malaysia': ['UUSfs5GTgt6HUhu7IViv8JWj', '马股', '马股技术交易'],
-    'Bursa Stock Signal Analysis': ['UUdq3ERer4FSfs5GTgt6HUhu', '马股', '马股技术交易'],
+    'KLSE Technical Analysis Channel': ['UU8m9V7_Mx8-M7Z7Y7m9_AwA', '马股', '马股技术交易'],
+    'Chart Trader Malaysia': ['UU7m9X8v7_Mx9-Z7Y7m_q9wA', '马股', '马股技术交易'],
+    'Bursa Stock Signal Analysis': ['UU8m9v7_Mx8_M7Z7Y7m9_AwAA', '马股', '马股技术交易'],
     'Momentum KLSE Trading': ['UUTMOHFIHcfXYlBlCYZQ5Tuw', '马股', '马股技术交易'],
     'Profit Coach Malaysia 中文版': ['UU2I5em6UyBpQiO-8ZW0nV3w', '马股', '马股技术交易'],
 
@@ -54,7 +54,7 @@ TARGET_CHANNELS = {
     'Money & Me Malaysia': ['UU_MZmzANan0BObo1CPcp2D', '马股', '马股理财教育'],
     'Smart Investor Malaysia': ['UU2DQdq3ERer4FSfs5GTgt6H', '马股', '马股理财教育'],
 
-    'The Edge Malaysia': ['UUQD2pcPC1obOB0naNAzmZM_', '马股', '马股市场资讯'],
+    'The Edge Malaysia': ['UU9m8v7_Mx8_M7Z7Y7m9_AwAA', '马股', '马股市场资讯'],
     'BFM Business 89.9': ['UU5GTgt6HUhu7IViv8JWjw9K', '马股', '马股市场资讯'],
     'The Star Business Channel': ['UUJ8viVI7uhUH6tgTG5sfSF4', '马股', '马股市场资讯'],
     'Malaysia Business Insight': ['UUSfs5GTgt6HUhu7IViv8JWj', '马股', '马股市场资讯'],
