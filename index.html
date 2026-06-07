@@ -66,25 +66,35 @@
             }
             .join-btn:hover { background: #f8fafc; transform: scale(1.02); }
 
-            .filter-container { display: flex; flex-direction: column; gap: 10px; background: #f0f2f5; padding: 12px 15px; border-radius: 8px; }
-            .filter-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-            .filter-label { font-size: 12px; font-weight: 600; color: var(--text-muted); min-width: 85px; }
-            .filter-btn {
+            /* 🌟 全新精简版导航条：大按钮一键直达 */
+            .filter-container { 
+                display: flex; 
+                justify-content: center; 
+                gap: 15px; 
+                background: #f0f2f5; 
+                padding: 10px; 
+                border-radius: 8px; 
+            }
+            .filter-market-btn {
                 background: var(--card-bg);
                 border: 1px solid var(--border-color);
-                padding: 4px 12px;
+                padding: 8px 25px;
                 border-radius: 6px;
                 cursor: pointer;
-                font-size: 12px;
-                font-weight: 500;
-                transition: all 0.15s;
+                font-size: 14px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.2s;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.04);
             }
-            .filter-btn:hover { background: #f3f4f6; }
-            .filter-btn.active {
+            .filter-market-btn:hover { background: #f8fafc; transform: translateY(-1px); }
+            .filter-market-btn.active {
                 background: var(--primary-color);
                 color: white;
                 border-color: var(--primary-color);
-                box-shadow: 0 2px 4px rgba(9, 105, 218, 0.2);
+                box-shadow: 0 4px 10px rgba(9, 105, 218, 0.3);
             }
 
             .container { max-width: 1400px; margin: 20px auto; padding: 0 20px; }
@@ -131,7 +141,7 @@
             .meta-row { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; gap: 5px; }
             .meta-text { margin: 0; font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             
-            .market-tag { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; white-space: nowrap; }
+            .market-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; white-space: nowrap; }
             .tag-my { background: #e2f0fd; color: #0c66e4; border: 1px solid #bcd6f7; }
             .tag-us { background: #fff0f0; color: #ae1f24; border: 1px solid #f8cccb; }
             
@@ -147,7 +157,7 @@
             <div class="header-content">
                 <h2>
                     <span>🚦 红绿灯导航 · YT股票视频 直通车</span>
-                    <span class="update-time">🔄 更新时间: 2026-06-07 13:24</span>
+                    <span class="update-time">🔄 更新时间: 2026-06-07 13:34</span>
                 </h2>
                 
                 <div class="promo-banner">
@@ -161,34 +171,10 @@
                     </div>
                 </div>
                 
-                <div class="filter-container">
-                    <div class="filter-group" id="marketGroup">
-                        <span class="filter-label">🪐 大盘市场:</span>
-                        <button class="filter-btn active" onclick="filterMarket('全部', this)">核心全部</button>
-                        <button class="filter-btn" onclick="filterMarket('马股', this)">🇲🇾 马股专区</button>
-                        <button class="filter-btn" onclick="filterMarket('美股', this)">🇺🇸 美股专区</button>
-                    </div>
-                    <div class="filter-group" id="subcatGroup">
-                        <span class="filter-label">🎯 细分赛道:</span>
-                        <button class="filter-btn active" onclick="filterSubcat('全部', this)">全部策略类型</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股核心分析', this)">🧠 马股·核心分析</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股技术交易', this)">📈 马股·技术交易</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股隐藏价值', this)">🔥 马股·隐藏价值</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股宏观大局', this)">🏦 美股·宏观大局</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股技术个股', this)">🔬 美股·技术个股</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股财报数据', this)">📊 美股·财报数据</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股实盘情绪', this)">📈 美股·实盘情绪</button>
-                    </div>
-                    <div class="filter-group">
-                        <span class="filter-label">⏳ 辅助过滤:</span>
-                        <button class="filter-btn" onclick="filterSubcat('马股理财教育', this)">💰 马股·理财教育</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股市场资讯', this)">📰 马股·市场资讯</button>
-                        <button class="filter-btn" onclick="filterSubcat('全网模糊热点', this)">🔍 全网模糊抓取</button>
-                        <span style="border-left:1px solid #ccc; height:15px; margin:0 5px;"></span>
-                        <button class="filter-btn active" onclick="filterTime('全部', this)">全部时间</button>
-                        <button class="filter-btn" onclick="filterTime('今天', this)">🔥 今天新出</button>
-                        <button class="filter-btn" onclick="filterTime('本周', this)">📅 本周之内</button>
-                    </div>
+                <div class="filter-container" id="marketGroup">
+                    <button class="filter-market-btn active" onclick="filterMarket('全部', this)">⭐ 核心全部</button>
+                    <button class="filter-market-btn" onclick="filterMarket('马股', this)">🇲🇾 马股专区</button>
+                    <button class="filter-market-btn" onclick="filterMarket('美股', this)">🇺🇸 美股专区</button>
                 </div>
             </div>
         </div>
@@ -196,7 +182,7 @@
         <div class="container">
             <div class="grid" id="videoGrid">
                 
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=8oMozLjFqNY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/8oMozLjFqNY/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -207,7 +193,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 hkstockAI &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -217,7 +203,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=wSYHs1-Hnl0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/wSYHs1-Hnl0/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -228,7 +214,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 韭哥爱美股 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -238,7 +224,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=6lqb4gwhCRw" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/6lqb4gwhCRw/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -249,7 +235,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 投資趣 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -259,7 +245,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=GARdnZdeT-U" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/GARdnZdeT-U/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -270,7 +256,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 JohnLu谈股 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -280,7 +266,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=XA2LGhEIWAs" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/XA2LGhEIWAs/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -291,7 +277,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 远山政经 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -301,7 +287,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=Qz1V_gcEgIQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Qz1V_gcEgIQ/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -312,7 +298,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 一乐到底 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -322,7 +308,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=z_UuXoc3y6A" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/z_UuXoc3y6A/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -333,7 +319,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 币圈鱼丸 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -343,7 +329,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=zESWGVP0a7c" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/zESWGVP0a7c/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -354,7 +340,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 币圈鱼丸 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -364,7 +350,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=enLIhSzJg1I" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/enLIhSzJg1I/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -375,7 +361,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Melody 聊美股 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -385,7 +371,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=T0ssrPwFtPE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/T0ssrPwFtPE/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -396,7 +382,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 台股老船長 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -406,7 +392,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股核心分析" data-date="2026-06-07">
+        <div class="video-card" data-market="马股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=TmjTW4yECZk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/TmjTW4yECZk/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -417,7 +403,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">马股核心分析</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -427,7 +413,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=fsfLvWpznuM" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/fsfLvWpznuM/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -438,7 +424,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 USTV 非凡電視 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -448,7 +434,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="马股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=KepcOdYVQ3Q" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/KepcOdYVQ3Q/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -459,7 +445,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Trading with KS &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -469,7 +455,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="马股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=FV4WeKF9ATM" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/FV4WeKF9ATM/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -480,7 +466,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 股市老司机 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -490,7 +476,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=1xGB7JKG6b8" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/1xGB7JKG6b8/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -501,7 +487,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 投資深淵 &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -511,7 +497,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-07">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
             <a href="https://www.youtube.com/watch?v=MW9Lwz77IFQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/MW9Lwz77IFQ/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -522,7 +508,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 hkstockAI &nbsp;&nbsp; 📅 2026-06-07</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -532,7 +518,49 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
+            <a href="https://www.youtube.com/watch?v=4fIqb-FV_f8" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/4fIqb-FV_f8/hqdefault.jpg" alt="Thumbnail">
+            </a>
+            <div class="video-info">
+                <div class="info-top">
+                    <h3>
+                        <span class="title-new-badge">⚡NEW</span> <a href="https://www.youtube.com/watch?v=4fIqb-FV_f8" target="_blank">美股盘后意外暴跌！王老师预测6月18日将有大调整？</a>
+                    </h3>
+                    <div class="meta-row">
+                        <p class="meta-text">👤 CrazyLive 美股直播 &nbsp;&nbsp; 📅 2026-06-07</p>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=4fIqb-FV_f8" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="美股" data-date="2026-06-07">
+            <a href="https://www.youtube.com/watch?v=uDwJ7zv0hZs" target="_blank" class="thumbnail-wrapper">
+                <img src="https://i.ytimg.com/vi/uDwJ7zv0hZs/hqdefault.jpg" alt="Thumbnail">
+            </a>
+            <div class="video-info">
+                <div class="info-top">
+                    <h3>
+                        <span class="title-new-badge">⚡NEW</span> <a href="https://www.youtube.com/watch?v=uDwJ7zv0hZs" target="_blank">AI半導體突然暴跌！美股收網定健康回調？港股六絕月跌穿25000｜AVGO急挫、納指支持位、比特幣黃金部署｜【100%實倉覆盤】</a>
+                    </h3>
+                    <div class="meta-row">
+                        <p class="meta-text">👤 孫子大戶 &nbsp;&nbsp; 📅 2026-06-07</p>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
+                    <a href="https://www.youtube.com/watch?v=uDwJ7zv0hZs" target="_blank" class="play-btn">▶ 观看视频</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=ipL-VVkA5dE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/ipL-VVkA5dE/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -543,7 +571,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -553,7 +581,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=Z2QWru7-skU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Z2QWru7-skU/hqdefault_live.jpg" alt="Thumbnail">
             </a>
@@ -564,7 +592,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 我是雷公 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -574,7 +602,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=WsAkjnHr1Pc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/WsAkjnHr1Pc/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -585,7 +613,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 TI 懂一点 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -595,7 +623,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=mADXrFB1HyE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/mADXrFB1HyE/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -606,7 +634,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 一乐到底 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -616,7 +644,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=AxJ_0rFb-10" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/AxJ_0rFb-10/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -627,7 +655,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 關鍵時刻 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -637,7 +665,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=u7aoQjfM1sk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/u7aoQjfM1sk/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -648,7 +676,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 投資深淵 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -658,7 +686,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=M2ztdgMXpgk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/M2ztdgMXpgk/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -669,7 +697,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 老雷财经 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -679,7 +707,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=XBRzqUyEWQI" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/XBRzqUyEWQI/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -690,7 +718,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Cici on the way &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -700,7 +728,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=DjunmIODIZ8" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DjunmIODIZ8/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -711,7 +739,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 投資趣 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -721,7 +749,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=VmzyfoKFZ1U" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/VmzyfoKFZ1U/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -732,7 +760,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 SaveQuant &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -742,7 +770,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=TpzESWyYphc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/TpzESWyYphc/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -753,7 +781,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 TVBS NEWS &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -763,7 +791,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=tpsYfBxMfZo" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/tpsYfBxMfZo/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -774,7 +802,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 股市章鱼 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -784,7 +812,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=LbMx8Tz_6i4" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/LbMx8Tz_6i4/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -795,7 +823,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -805,7 +833,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=jLYF4_CwCKk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/jLYF4_CwCKk/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -816,7 +844,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 自由追新聞 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -826,7 +854,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=xzIyrfulhU0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/xzIyrfulhU0/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -837,7 +865,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 股市老司机 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -847,7 +875,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=LPSgt4tsj6A" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/LPSgt4tsj6A/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -858,7 +886,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 股市章鱼 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -868,7 +896,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=pg07FyDajKQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/pg07FyDajKQ/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -879,7 +907,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 AI财富领航 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -889,7 +917,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=Lwz6AZs36xs" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Lwz6AZs36xs/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -900,7 +928,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Mia Tradin聊美股 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -910,7 +938,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=W2YjJBSko28" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/W2YjJBSko28/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -921,7 +949,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 民視新聞網 Formosa TV News network &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -931,7 +959,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=lPFLzAAtk0I" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/lPFLzAAtk0I/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -942,7 +970,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 民視新聞網 Formosa TV News network &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -952,7 +980,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=_XoosXb_J2Q" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/_XoosXb_J2Q/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -963,7 +991,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 加密未来CryptoFuture &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -973,7 +1001,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=hg1d1M-P_os" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/hg1d1M-P_os/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -984,7 +1012,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 JASON美股实盘直播 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -994,7 +1022,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=6d8v__6TrXY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/6d8v__6TrXY/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1005,7 +1033,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 鏡報  &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1015,7 +1043,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=vMT_rzDmfiE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/vMT_rzDmfiE/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1026,7 +1054,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 蒙面财经MaskFinance &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1036,7 +1064,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=9LQJvKPlbZ0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/9LQJvKPlbZ0/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1047,7 +1075,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Trading with KS &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1057,7 +1085,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=Wfi0ba19YkM" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/Wfi0ba19YkM/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1068,7 +1096,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美国审计CIA德州朱莉 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1078,7 +1106,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=F9bNUNw3F18" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/F9bNUNw3F18/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1089,7 +1117,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 新聞大白話 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1099,7 +1127,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=_z3_MYVNbFA" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/_z3_MYVNbFA/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1110,7 +1138,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 hkstockAI &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1120,7 +1148,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=PG_dJAZ7WTk" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/PG_dJAZ7WTk/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1131,7 +1159,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 三立新聞LIVE &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1141,7 +1169,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=uCmQiiZmg_w" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/uCmQiiZmg_w/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1152,7 +1180,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 譚紹興頻道-Ricky Tam's Channel &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1162,7 +1190,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=T_O4kaDCKy4" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/T_O4kaDCKy4/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1173,7 +1201,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美股數據張老師 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1183,7 +1211,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="美股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=xF4EaDSVSkM" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/xF4EaDSVSkM/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1194,7 +1222,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 投資深淵 &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1204,7 +1232,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-06">
+        <div class="video-card" data-market="马股" data-date="2026-06-06">
             <a href="https://www.youtube.com/watch?v=YlmJSRnxivE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/YlmJSRnxivE/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1215,7 +1243,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Andy Yew &nbsp;&nbsp; 📅 2026-06-06</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1225,7 +1253,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=4Qjvf5kh2yY" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/4Qjvf5kh2yY/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1236,7 +1264,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 GoLET投资空间 &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1246,7 +1274,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=ct0LQ8jBCEQ" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/ct0LQ8jBCEQ/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1257,7 +1285,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 CLEO 极美人生 &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1267,7 +1295,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=N9PSZhZYD1I" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/N9PSZhZYD1I/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1278,7 +1306,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Bursa News (马股-报报看) &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1288,7 +1316,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=j21fKMQeLn0" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/j21fKMQeLn0/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1299,7 +1327,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Trading with KS &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1309,7 +1337,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="马股" data-subcat="全网模糊热点" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=DaLAIHJ_sQU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DaLAIHJ_sQU/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1320,7 +1348,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 股哥说股@jeff &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-my">全网模糊热点</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1330,7 +1358,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=9jFqrZkI98Q" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/9jFqrZkI98Q/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1341,7 +1369,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1351,7 +1379,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股核心分析" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=YoePR6yfqzs" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/YoePR6yfqzs/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1362,7 +1390,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-us">马股核心分析</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1372,7 +1400,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股核心分析" data-date="2026-06-05">
+        <div class="video-card" data-market="马股" data-date="2026-06-05">
             <a href="https://www.youtube.com/watch?v=7WdbmJSqJmA" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/7WdbmJSqJmA/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1383,7 +1411,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-05</p>
-                        <span class="market-tag tag-us">马股核心分析</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1393,7 +1421,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-04">
+        <div class="video-card" data-market="马股" data-date="2026-06-04">
             <a href="https://www.youtube.com/watch?v=v8l4kPon3hA" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/v8l4kPon3hA/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1404,7 +1432,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-04</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1414,7 +1442,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-04">
+        <div class="video-card" data-market="马股" data-date="2026-06-04">
             <a href="https://www.youtube.com/watch?v=uch42ETlM5k" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/uch42ETlM5k/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1425,7 +1453,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-04</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1435,7 +1463,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-04">
+        <div class="video-card" data-market="马股" data-date="2026-06-04">
             <a href="https://www.youtube.com/watch?v=9T68QPWnXFw" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/9T68QPWnXFw/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1446,7 +1474,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-04</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1456,7 +1484,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股核心分析" data-date="2026-06-04">
+        <div class="video-card" data-market="马股" data-date="2026-06-04">
             <a href="https://www.youtube.com/watch?v=P60gHUGhx9c" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/P60gHUGhx9c/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1467,7 +1495,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-04</p>
-                        <span class="market-tag tag-us">马股核心分析</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1477,7 +1505,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股核心分析" data-date="2026-06-04">
+        <div class="video-card" data-market="马股" data-date="2026-06-04">
             <a href="https://www.youtube.com/watch?v=optz-7HnJSA" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/optz-7HnJSA/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1488,7 +1516,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 美股小头狼Stock Alpha Research &nbsp;&nbsp; 📅 2026-06-04</p>
-                        <span class="market-tag tag-us">马股核心分析</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1498,7 +1526,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-03">
+        <div class="video-card" data-market="马股" data-date="2026-06-03">
             <a href="https://www.youtube.com/watch?v=DGI5ph49XdE" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/DGI5ph49XdE/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1509,7 +1537,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-03</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1519,7 +1547,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-02">
+        <div class="video-card" data-market="马股" data-date="2026-06-02">
             <a href="https://www.youtube.com/watch?v=JsP69VXjass" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/JsP69VXjass/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1530,7 +1558,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-02</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1540,7 +1568,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-02">
+        <div class="video-card" data-market="马股" data-date="2026-06-02">
             <a href="https://www.youtube.com/watch?v=zmD-AgJPs84" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/zmD-AgJPs84/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1551,7 +1579,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-02</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1561,7 +1589,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-01">
+        <div class="video-card" data-market="马股" data-date="2026-06-01">
             <a href="https://www.youtube.com/watch?v=do7pOS1NCWw" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/do7pOS1NCWw/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1572,7 +1600,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-06-01</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1582,7 +1610,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-06-01">
+        <div class="video-card" data-market="马股" data-date="2026-06-01">
             <a href="https://www.youtube.com/watch?v=O-JWwoYSwVc" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/O-JWwoYSwVc/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1593,7 +1621,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-06-01</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1603,7 +1631,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="马股隐藏价值" data-date="2026-05-31">
+        <div class="video-card" data-market="马股" data-date="2026-05-31">
             <a href="https://www.youtube.com/watch?v=_wqsevj_bjs" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/_wqsevj_bjs/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1614,7 +1642,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-05-31</p>
-                        <span class="market-tag tag-us">马股隐藏价值</span>
+                        <span class="market-tag tag-my">🇲🇾 马股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1624,7 +1652,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-05-28">
+        <div class="video-card" data-market="美股" data-date="2026-05-28">
             <a href="https://www.youtube.com/watch?v=O_Aud59dus4" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/O_Aud59dus4/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1635,7 +1663,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 Jack说美股 &nbsp;&nbsp; 📅 2026-05-28</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1645,7 +1673,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-05-20">
+        <div class="video-card" data-market="美股" data-date="2026-05-20">
             <a href="https://www.youtube.com/watch?v=smAJaPHOg5E" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/smAJaPHOg5E/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1656,7 +1684,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-05-20</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1666,7 +1694,7 @@
             </div>
         </div>
         
-        <div class="video-card" data-market="美股" data-subcat="全网模糊热点" data-date="2026-05-12">
+        <div class="video-card" data-market="美股" data-date="2026-05-12">
             <a href="https://www.youtube.com/watch?v=CTAtJw74WvU" target="_blank" class="thumbnail-wrapper">
                 <img src="https://i.ytimg.com/vi/CTAtJw74WvU/hqdefault.jpg" alt="Thumbnail">
             </a>
@@ -1677,7 +1705,7 @@
                     </h3>
                     <div class="meta-row">
                         <p class="meta-text">👤 阳光财经 &nbsp;&nbsp; 📅 2026-05-12</p>
-                        <span class="market-tag tag-us">全网模糊热点</span>
+                        <span class="market-tag tag-us">🇺🇸 美股</span>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -1692,61 +1720,21 @@
 
         <script>
             let currentMarket = '全部';
-            let currentSubcat = '全部';
-            let currentTime = '全部';
 
             function filterMarket(market, btn) {
-                document.querySelectorAll('#marketGroup .filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('#marketGroup .filter-market-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentMarket = market;
                 applyFilters();
             }
 
-            function filterSubcat(subcat, btn) {
-                btn.parentElement.parentElement.querySelectorAll('.filter-btn').forEach(b => {
-                    if(!b.getAttribute('onclick').includes('filterTime')) b.classList.remove('active');
-                });
-                btn.classList.add('active');
-                currentSubcat = subcat;
-                applyFilters();
-            }
-
-            function filterTime(timeRange, btn) {
-                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => {
-                    if(b.getAttribute('onclick').includes('filterTime')) b.classList.remove('active');
-                });
-                btn.classList.add('active');
-                currentTime = timeRange;
-                applyFilters();
-            }
-
             function applyFilters() {
                 const cards = document.querySelectorAll('.video-card');
-                const todayStr = new Date().toISOString().split('T')[0];
-                
-                const now = new Date();
-                const day = now.getDay();
-                const diff = now.getDate() - day + (day === 0 ? -6 : 1); 
-                const mondayStr = new Date(now.setDate(diff)).toISOString().split('T')[0];
-
                 cards.forEach(card => {
                     const market = card.getAttribute('data-market');
-                    const subcat = card.getAttribute('data-subcat');
-                    const date = card.getAttribute('data-date');
-                    
                     let matchMarket = (currentMarket === '全部' || market === currentMarket);
-                    let matchSubcat = (currentSubcat === '全部' || subcat === currentSubcat);
-                    let matchTime = false;
 
-                    if (currentTime === '全部') {
-                        matchTime = true;
-                    } else if (currentTime === '今天') {
-                        matchTime = (date === todayStr);
-                    } else if (currentTime === '本周') {
-                        matchTime = (date >= mondayStr);
-                    }
-
-                    if (matchMarket && matchSubcat && matchTime) {
+                    if (matchMarket) {
                         card.style.display = 'flex';
                     } else {
                         card.style.display = 'none';
