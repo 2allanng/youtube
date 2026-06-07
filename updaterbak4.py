@@ -26,41 +26,6 @@ TARGET_CHANNELS = {
     '一只居和鸭': ['UC5GTgt6HUhu7IViv8JWjw9K', '美股'],
     '艾财说imoneytalk': ['UCJ8viVI7uhUH6tgTG5sfSF4', '美股'],
     'Money or Life ': ['UCSfs5GTgt6HUhu7IViv8JWj', '美股'],
-    # 🇲🇾 ① 核心马股分析频道（必须关注）
-    'KS看股 (TradingWithKS)': ['UCcp2DQdq3ERer4FSfs5GTgt', '马股'],
-    'Superbull KLSE 牛转钱坤': ['UC0naNAzmZM_ylYL-xkXK9wj', '马股'],
-    'Mahersaham 中文教学内容': ['UCy_MZmzANan0BObo1CPcp2D', '马股'],
-    'Shukri Saham Global 中文解说': ['UC2DQdq3ERer4FSfs5GTgt6H', '马股'],
-    'Financial Faiz': ['UCQD2pcPC1obOB0naNAzmZM_', '马股'],
-    'Ziet Invests': ['UCbHz_wWlvaf_yueKyRbddyg', '马股'],
-    'The Kapital KLSE 分析': ['UC5GTgt6HUhu7IViv8JWjw9K', '马股'],
-
-    # 📈 ② 技术面 / 交易型马股频道
-    'KLSE Technical Analysis Channel': ['UCJ8viVI7uhUH6tgTG5sfSF4', '马股'],
-    'Chart Trader Malaysia': ['UCSfs5GTgt6HUhu7IViv8JWj', '马股'],
-    'Bursa Stock Signal Analysis': ['UCdq3ERer4FSfs5GTgt6HUhu', '马股'],
-    'Momentum KLSE Trading': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '马股'],
-    'Profit Coach Malaysia 中文版': ['UC2I5em6UyBpQiO-8ZW0nV3w', '马股'],
-
-    # 💰 ③ 理财 + 投资教育（长期最稳）
-    'Spark Liang 张开亮': ['UC86Z99N9vA7S7f_bW29yCjw', '马股'], # 注：部分兼顾美马股
-    'Ringgit & Sense (BFM)': ['UCo1CPcp2DQdq3ERer4FSfs5', '马股'],
-    'Asri Ahmad Academy': ['UC_naNAzmZM_ylYL-xkXK9wj', '马股'],
-    'Money & Me Malaysia': ['UC_MZmzANan0BObo1CPcp2D', '马股'],
-    'Smart Investor Malaysia': ['UC2DQdq3ERer4FSfs5GTgt6H', '马股'],
-
-    # 📰 ④ 马股资讯 + 市场解读
-    'The Edge Malaysia': ['UCQD2pcPC1obOB0naNAzmZM_', '马股'],
-    'BFM Business 89.9': ['UC5GTgt6HUhu7IViv8JWjw9K', '马股'],
-    'The Star Business Channel': ['UCJ8viVI7uhUH6tgTG5sfSF4', '马股'],
-    'Malaysia Business Insight': ['UCSfs5GTgt6HUhu7IViv8JWj', '马股'],
-    'Bursa Malaysia Official': ['UCdq3ERer4FSfs5GTgt6HUhu', '马股'],
-
-    # 🔥 ⑤ “隐藏但高价值”（容易忽略）
-    'Andy Yew KLSE Review': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '马股'],
-    'Investor ML Malaysia': ['UC2I5em6UyBpQiO-8ZW0nV3w', '马股'],
-    'Stockbit Malaysia Community': ['UCcp2DQdq3ERer4FSfs5GTgt', '马股'],
-    'Trading With KS Secondary': ['UC0naNAzmZM_ylYL-xkXK9wj', '马股'],
 }
 # ====================================================
 
