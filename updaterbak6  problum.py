@@ -9,13 +9,14 @@ API_KEY = 'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
 
-# 📡 美股、马股全面细分配置矩阵
+# 📡 终极完全体：美股、马股全面细分配置矩阵
+# 格式：'频道展示名': ['频道ID', '大市场(美股/马股)', '细分内容分类']
 TARGET_CHANNELS = {
     # 🇺🇸 美股精准分类专区
     '娜娜说美股': ['UC86Z99N9vA7S7f_bW29yCjw', '美股', '美股实盘情绪'],
     '澳洲Henry': ['UCdq3ERer4FSfs5GTgt6HUhu', '美股', '美股实盘情绪'],
     '一只居和鸭': ['UC5GTgt6HUhu7IViv8JWjw9K', '美股', '美股实盘情绪'],
-    'Money or Life ': ['UCSfs5GTgt6HUhu7IViv8JWj', '美股', '美股实盘情绪'],
+    'Money or Life ': ['UCSfs5FSfs5GTgt6HUhu7IViv', '美股', '美股实盘情绪'],
     
     '杰克说美股': ['UCTMOHFIHcfXYlBlCYZQ5Tuw', '美股', '美股技术个股'],
     '阿明说美股': ['UC2DQdq3ERer4FSfs5GTgt6H', '美股', '美股技术个股'],
@@ -111,7 +112,6 @@ def fetch_channel_videos(channel_name, channel_id, market_tag, sub_category):
 def parse_youtube_response(response, market_tag, sub_category):
     videos = []
     for item in response.get('items', []):
-        if 'videoId' not in item['id']: continue
         video_id = item['id']['videoId']
         snippet = item['snippet']
         videos.append({
@@ -148,14 +148,12 @@ def generate_html(video_list):
                 <img src="{video['thumbnail']}" alt="Thumbnail">
             </a>
             <div class="video-info">
-                <div class="info-top">
-                    <h3>
-                        {title_new_tag}<a href="{video['video_url']}" target="_blank">{video['title']}</a>
-                    </h3>
-                    <div class="meta-row">
-                        <p class="meta-text">👤 {video['channel']} &nbsp;&nbsp; 📅 {video['date']}</p>
-                        <span class="market-tag {tag_class}">{sub_cat}</span>
-                    </div>
+                <h3>
+                    {title_new_tag}<a href="{video['video_url']}" target="_blank">{video['title']}</a>
+                </h3>
+                <div class="meta-row">
+                    <p class="meta-text">👤 {video['channel']} &nbsp;&nbsp; 📅 {video['date']}</p>
+                    <span class="market-tag {tag_class}">{sub_cat}</span>
                 </div>
                 <div class="card-footer">
                     <button class="report-btn" onclick="alert('Reported successfully!')">🚩 Report</button>
@@ -187,7 +185,6 @@ def generate_html(video_list):
                 --border-color: #d0d7de;
                 --promo-bg: linear-gradient(135deg, #1e3a8a, #3b82f6);
             }}
-            * {{ box-sizing: border-box; }}
             body {{ 
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
                 background-color: var(--bg-color); 
@@ -198,69 +195,70 @@ def generate_html(video_list):
             .header {{
                 background: var(--card-bg);
                 border-bottom: 1px solid var(--border-color);
-                padding: 15px 20px;
+                padding: 20px;
                 position: sticky;
                 top: 0;
                 z-index: 100;
                 box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             }}
-            .header-content {{ max-width: 1400px; margin: 0 auto; }}
-            h2 {{ margin: 0 0 12px 0; font-size: 22px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; color: #111827; }}
+            .header-content {{ max-width: 1300px; margin: 0 auto; }}
+            h2 {{ margin: 0 0 15px 0; font-size: 24px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; color: #111827; }}
             .update-time {{ font-size: 13px; color: var(--text-muted); font-weight: normal; }}
             
             .promo-banner {{
                 background: var(--promo-bg);
                 color: white;
-                padding: 10px 18px;
-                border-radius: 8px;
-                margin-bottom: 15px;
+                padding: 14px 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: 15px;
             }}
-            .promo-text {{ display: flex; flex-direction: column; gap: 2px; }}
-            .promo-title {{ font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }}
-            .promo-sub {{ font-size: 12px; color: #e0f2fe; opacity: 0.9; }}
-            .promo-action {{ display: flex; align-items: center; gap: 10px; }}
-            .promo-contact {{ font-size: 13px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
+            .promo-text {{ display: flex; flex-direction: column; gap: 4px; }}
+            .promo-title {{ font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }}
+            .promo-sub {{ font-size: 13px; color: #e0f2fe; opacity: 0.9; }}
+            .promo-action {{ display: flex; align-items: center; gap: 12px; }}
+            .promo-contact {{ font-size: 14px; background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
             .join-btn {{
                 background: #ffffff;
                 color: #1e3a8a;
                 text-decoration: none;
-                padding: 6px 14px;
+                padding: 8px 18px;
                 border-radius: 6px;
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: 700;
                 transition: all 0.2s;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }}
-            .join-btn:hover {{ background: #f8fafc; transform: scale(1.02); }}
+            .join-btn:hover {{ background: #f8fafc; transform: scale(1.03); }}
 
-            .filter-container {{ display: flex; flex-direction: column; gap: 10px; background: #f0f2f5; padding: 12px 15px; border-radius: 8px; }}
-            .filter-group {{ display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }}
-            .filter-label {{ font-size: 12px; font-weight: 600; color: var(--text-muted); min-width: 85px; }}
+            .filter-container {{ display: flex; flex-direction: column; gap: 12px; background: #f0f2f5; padding: 15px; border-radius: 8px; }}
+            .filter-group {{ display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }}
+            .filter-label {{ font-size: 13px; font-weight: 600; color: var(--text-muted); min-width: 80px; }}
             .filter-btn {{
                 background: var(--card-bg);
                 border: 1px solid var(--border-color);
-                padding: 4px 12px;
+                padding: 6px 14px;
                 border-radius: 6px;
                 cursor: pointer;
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: 500;
-                transition: all 0.15s;
+                transition: all 0.2s;
             }}
             .filter-btn:hover {{ background: #f3f4f6; }}
             .filter-btn.active {{
                 background: var(--primary-color);
                 color: white;
                 border-color: var(--primary-color);
-                box-shadow: 0 2px 4px rgba(9, 105, 218, 0.2);
+                box-shadow: 0 2px 4px rgba(9, 105, 218, 0.3);
             }}
 
-            .container {{ max-width: 1400px; margin: 20px auto; padding: 0 20px; }}
-            .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }}
+            .container {{ max-width: 1300px; margin: 25px auto; padding: 0 20px; }}
+            .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }}
             @media (max-width: 500px) {{ .grid {{ grid-template-columns: 1fr; }} }}
             
             .video-card {{ 
@@ -268,30 +266,34 @@ def generate_html(video_list):
                 background: var(--card-bg); 
                 border: 1px solid var(--border-color); 
                 padding: 12px; 
-                border-radius: 10px; 
-                box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-                height: 125px; /* 固定卡片高度，杜绝挤压重叠 */
-                overflow: hidden;
+                border-radius: 12px; 
+                box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }}
+            .video-card:hover {{ 
+                transform: translateY(-4px); 
+                box-shadow: 0 8px 16px rgba(0,0,0,0.08); 
             }}
             
-            .thumbnail-wrapper {{ position: relative; flex-shrink: 0; width: 145px; height: 101px; border-radius: 6px; overflow: hidden; background: #eee; }}
+            .thumbnail-wrapper {{ position: relative; flex-shrink: 0; width: 150px; height: 95px; margin-right: 14px; border-radius: 8px; overflow: hidden; background: #eee; }}
             .thumbnail-wrapper img {{ width: 100%; height: 100%; object-fit: cover; }}
             
-            .video-info {{ display: flex; flex-direction: column; justify-content: space-between; flex: 1; min-width: 0; padding-left: 12px; }}
-            .info-top {{ min-width: 0; }}
-            .video-info h3 {{ margin: 0 0 4px 0; font-size: 13px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 35px; }}
+            .video-info {{ display: flex; flex-direction: column; justify-content: space-between; flex: 1; min-width: 0; }}
+            .video-info h3 {{ margin: 0 0 6px 0; font-size: 14px; font-weight: 600; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
             .video-info h3 a {{ text-decoration: none; color: var(--text-main); }}
             .video-info h3 a:hover {{ color: var(--primary-color); }}
             
             .title-new-badge {{
                 background: #cf222e;
                 color: white;
-                font-size: 10px;
+                font-size: 11px;
                 font-weight: 800;
-                padding: 1px 4px;
-                border-radius: 3px;
+                padding: 1px 6px;
+                border-radius: 4px;
                 display: inline-block;
+                vertical-align: middle;
                 margin-right: 4px;
+                box-shadow: 0 2px 4px rgba(207, 34, 46, 0.3);
                 animation: flash 1.5s infinite;
             }}
             @keyframes flash {{
@@ -300,17 +302,17 @@ def generate_html(video_list):
                 100% {{ opacity: 1; background: #cf222e; }}
             }}
 
-            .meta-row {{ display: flex; justify-content: space-between; align-items: center; margin-top: 4px; gap: 5px; }}
-            .meta-text {{ margin: 0; font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+            .meta-row {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 5px; }}
+            .meta-text {{ margin: 0; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
             
-            .market-tag {{ font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; white-space: nowrap; }}
+            .market-tag {{ font-size: 11px; padding: 2px 8px; border-radius: 2em; font-weight: 600; white-space: nowrap; }}
             .tag-my {{ background: #e2f0fd; color: #0c66e4; border: 1px solid #bcd6f7; }}
             .tag-us {{ background: #fff0f0; color: #ae1f24; border: 1px solid #f8cccb; }}
             
-            .card-footer {{ display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #edf2f7; padding-top: 4px; height: 24px; }}
-            .report-btn {{ background: none; border: none; color: #cf222e; cursor: pointer; font-size: 11px; display: flex; align-items: center; gap: 3px; padding: 2px 4px; border-radius: 4px; }}
+            .card-footer {{ display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #edf2f7; padding-top: 8px; }}
+            .report-btn {{ background: none; border: none; color: #cf222e; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 3px; padding: 4px; border-radius: 4px; }}
             .report-btn:hover {{ background: #ffe7e6; }}
-            .play-btn {{ text-decoration: none; font-size: 11px; background: #f3f4f6; color: var(--text-main); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color); font-weight: 500; }}
+            .play-btn {{ text-decoration: none; font-size: 12px; background: #f3f4f6; color: var(--text-main); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-weight: 500; transition: all 0.2s; }}
             .play-btn:hover {{ background: var(--primary-color); color: white; border-color: var(--primary-color); }}
         </style>
     </head>
@@ -334,30 +336,34 @@ def generate_html(video_list):
                 </div>
                 
                 <div class="filter-container">
-                    <div class="filter-group" id="marketGroup">
-                        <span class="filter-label">🪐 大盘市场:</span>
-                        <button class="filter-btn active" onclick="filterMarket('全部', this)">核心全部</button>
+                    <div class="filter-group">
+                        <span class="filter-label">大盘市场:</span>
+                        <button class="filter-btn active" onclick="filterMarket('全部', this)">全部</button>
                         <button class="filter-btn" onclick="filterMarket('马股', this)">🇲🇾 马股专区</button>
                         <button class="filter-btn" onclick="filterMarket('美股', this)">🇺🇸 美股专区</button>
                     </div>
-                    <div class="filter-group" id="subcatGroup">
-                        <span class="filter-label">🎯 细分赛道:</span>
-                        <button class="filter-btn active" onclick="filterSubcat('全部', this)">全部策略类型</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股核心分析', this)">🧠 马股·核心分析</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股技术交易', this)">📈 马股·技术交易</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股隐藏价值', this)">🔥 马股·隐藏价值</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股宏观大局', this)">🏦 美股·宏观大局</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股技术个股', this)">🔬 美股·技术个股</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股财报数据', this)">📊 美股·财报数据</button>
-                        <button class="filter-btn" onclick="filterSubcat('美股实盘情绪', this)">📈 美股·实盘情绪</button>
+                    <div class="filter-group">
+                        <span class="filter-label">🇺🇸 美股细分:</span>
+                        <button class="filter-btn active" onclick="filterSubcat('全部', this)">全部美股</button>
+                        <button class="filter-btn" onclick="filterSubcat('美股宏观大局', this)">🏦 宏观大局</button>
+                        <button class="filter-btn" onclick="filterSubcat('美股技术个股', this)">🔬 技术个股</button>
+                        <button class="filter-btn" onclick="filterSubcat('美股财报数据', this)">📊 财报数据</button>
+                        <button class="filter-btn" onclick="filterSubcat('美股实盘情绪', this)">📈 实盘情绪</button>
                     </div>
                     <div class="filter-group">
-                        <span class="filter-label">⏳ 辅助过滤:</span>
-                        <button class="filter-btn" onclick="filterSubcat('马股理财教育', this)">💰 马股·理财教育</button>
-                        <button class="filter-btn" onclick="filterSubcat('马股市场资讯', this)">📰 马股·市场资讯</button>
+                        <span class="filter-label">🇲🇾 马股细分:</span>
+                        <button class="filter-btn active" onclick="filterSubcat('全部', this)">全部马股</button>
+                        <button class="filter-btn" onclick="filterSubcat('马股核心分析', this)">🧠 核心分析</button>
+                        <button class="filter-btn" onclick="filterSubcat('马股技术交易', this)">📈 技术交易</button>
+                        <button class="filter-btn" onclick="filterSubcat('马股理财教育', this)">💰 理财教育</button>
+                        <button class="filter-btn" onclick="filterSubcat('马股市场资讯', this)">📰 市场资讯</button>
+                        <button class="filter-btn" onclick="filterSubcat('马股隐藏价值', this)">🔥 隐藏价值</button>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-label">其他通用:</span>
+                        <button class="filter-btn active" onclick="filterSubcat('全部', this)">全部数据源</button>
                         <button class="filter-btn" onclick="filterSubcat('全网模糊热点', this)">🔍 全网模糊抓取</button>
-                        <span style="border-left:1px solid #ccc; height:15px; margin:0 5px;"></span>
-                        <button class="filter-btn active" onclick="filterTime('全部', this)">全部时间</button>
+                        <button class="filter-btn" onclick="filterTime('全部', this)">🕒 全部时间</button>
                         <button class="filter-btn" onclick="filterTime('今天', this)">🔥 今天新出</button>
                         <button class="filter-btn" onclick="filterTime('本周', this)">📅 本周之内</button>
                     </div>
@@ -377,27 +383,26 @@ def generate_html(video_list):
             let currentTime = '全部';
 
             function filterMarket(market, btn) {{
-                document.querySelectorAll('#marketGroup .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentMarket = market;
                 applyFilters();
             }}
 
             function filterSubcat(subcat, btn) {{
-                // 清理所有细分以及辅助筛选按钮的 active 状态
-                btn.parentElement.parentElement.querySelectorAll('.filter-group:nth-child(2) .filter-btn, .filter-group:nth-child(3) .filter-btn').forEach(b => {{
-                    // 排除掉时间按钮
-                    if(!b.getAttribute('onclick').includes('filterTime')) b.classList.remove('active');
-                }});
+                // 因为跨组，我们需要将第二、三、四层中非当前点击组的 active 全清，并将自己的组激活
+                if(btn.parentElement.parentElement) {{
+                    btn.parentElement.parentElement.querySelectorAll('.filter-btn').forEach(b => {{
+                        if(b.parentElement === btn.parentElement) b.classList.remove('active');
+                    }});
+                }}
                 btn.classList.add('active');
                 currentSubcat = subcat;
                 applyFilters();
             }}
 
             function filterTime(timeRange, btn) {{
-                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => {{
-                    if(b.getAttribute('onclick').includes('filterTime')) b.classList.remove('active');
-                }});
+                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentTime = timeRange;
                 applyFilters();
@@ -466,6 +471,7 @@ if __name__ == "__main__":
     new_count = 0
     for video in all_fetched:
         if video['id'] in existing_ids:
+            # 兼容：为本地老数据库刷新新的细分标签
             for lv in local_videos:
                 if lv['id'] == video['id']:
                     lv['sub_category'] = video['sub_category']
