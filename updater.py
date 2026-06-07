@@ -7,7 +7,7 @@ from googleapiclient.errors import HttpError
 # ==================== 核心配置区域 ====================
 # 🔑 🔴 谷歌 API 密钥资源池（已锁定你的满血新钥匙）
 API_KEY_POOL = [
-    'AIzaSyC-ZxeeFTyMLoOVaKSBdEw_4yU4en6w0sk'
+    'AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84'
 ]
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
