@@ -495,7 +495,8 @@
         "video_url": "https://www.youtube.com/watch?v=9jFqrZkI98Q",
         "channel": "阳光财经",
         "date": "2026-06-05",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股隐藏价值"
     },
     {
         "id": "9T68QPWnXFw",
@@ -504,7 +505,8 @@
         "video_url": "https://www.youtube.com/watch?v=9T68QPWnXFw",
         "channel": "阳光财经",
         "date": "2026-06-04",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股隐藏价值"
     },
     {
         "id": "DGI5ph49XdE",
@@ -513,7 +515,8 @@
         "video_url": "https://www.youtube.com/watch?v=DGI5ph49XdE",
         "channel": "阳光财经",
         "date": "2026-06-03",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股隐藏价值"
     },
     {
         "id": "zmD-AgJPs84",
@@ -522,7 +525,8 @@
         "video_url": "https://www.youtube.com/watch?v=zmD-AgJPs84",
         "channel": "阳光财经",
         "date": "2026-06-02",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股隐藏价值"
     },
     {
         "id": "smAJaPHOg5E",
@@ -540,7 +544,8 @@
         "video_url": "https://www.youtube.com/watch?v=TmjTW4yECZk",
         "channel": "美股小头狼Stock Alpha Research",
         "date": "2026-06-07",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股核心分析"
     },
     {
         "id": "YoePR6yfqzs",
@@ -549,7 +554,8 @@
         "video_url": "https://www.youtube.com/watch?v=YoePR6yfqzs",
         "channel": "美股小头狼Stock Alpha Research",
         "date": "2026-06-05",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股核心分析"
     },
     {
         "id": "7WdbmJSqJmA",
@@ -558,7 +564,8 @@
         "video_url": "https://www.youtube.com/watch?v=7WdbmJSqJmA",
         "channel": "美股小头狼Stock Alpha Research",
         "date": "2026-06-05",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股核心分析"
     },
     {
         "id": "P60gHUGhx9c",
@@ -567,7 +574,8 @@
         "video_url": "https://www.youtube.com/watch?v=P60gHUGhx9c",
         "channel": "美股小头狼Stock Alpha Research",
         "date": "2026-06-04",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股核心分析"
     },
     {
         "id": "optz-7HnJSA",
@@ -576,7 +584,8 @@
         "video_url": "https://www.youtube.com/watch?v=optz-7HnJSA",
         "channel": "美股小头狼Stock Alpha Research",
         "date": "2026-06-04",
-        "keyword": "美股"
+        "keyword": "美股",
+        "sub_category": "马股核心分析"
     },
     {
         "id": "CTAtJw74WvU",
@@ -605,5 +614,15 @@
         "channel": "Jack说美股",
         "date": "2026-05-28",
         "keyword": "美股"
+    },
+    {
+        "id": "O-JWwoYSwVc",
+        "title": "美股：戴尔翻倍美光破千，微软胎动。养老金拉黑一明星股。【2026-06-01】",
+        "thumbnail": "https://i.ytimg.com/vi/O-JWwoYSwVc/hqdefault.jpg",
+        "video_url": "https://www.youtube.com/watch?v=O-JWwoYSwVc",
+        "channel": "阳光财经",
+        "date": "2026-06-01",
+        "keyword": "美股",
+        "sub_category": "马股隐藏价值"
     }
 ]
