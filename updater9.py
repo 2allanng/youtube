@@ -5,21 +5,12 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # ==================== 核心配置区域 ====================
+# 🔑 🔴 谷歌 API 密钥资源池（已锁定你的满血新钥匙）
+API_KEY_POOL = [
+    'AIzaSyD-aCVygFoqf5waxh9vzTDyHGyTN_8ng84'
+]
 JSON_FILE = 'data.json'
 HTML_FILE = 'index.html'
-CONFIG_FILE = 'config.txt'  # 本地隐藏钥匙包文件
-
-# 🔑 动态暗号对接：从本地安全文件读取密钥，GitHub 绝对查不到
-API_KEY_POOL = []
-if os.path.exists(CONFIG_FILE):
-    with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
-        key_content = f.read().strip()
-        if key_content:
-            API_KEY_POOL = [key_content]
-
-# 如果本地没找到配置，采用防挂安全占位符
-if not API_KEY_POOL:
-    API_KEY_POOL = ['PLACEHOLDER_KEY_FOR_SAFETY']
 
 # 📡 精简化完全体：28大核心大V矩阵（回归纯粹大市场归类）
 TARGET_CHANNELS = {
@@ -274,7 +265,7 @@ def generate_html(video_list):
             .promo-title {{ font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }}
             .promo-sub {{ font-size: 12px; color: #e0f2fe; opacity: 0.9; }}
             .promo-action {{ display: flex; align-items: center; gap: 10px; }}
-            .promo-contact {{ font-size: 14px; background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
+            .promo-contact {{ font-size: 14px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 6px; border: 1px dashed rgba(255,255,255,0.3); font-weight: 500; }}
             .join-btn {{
                 background: #ffffff;
                 color: #1e3a8a;
@@ -287,6 +278,7 @@ def generate_html(video_list):
             }}
             .join-btn:hover {{ background: #f8fafc; transform: scale(1.02); }}
 
+            /* 🌟 精简版导航条：大国旗按钮一键直达 */
             .filter-container {{ 
                 display: flex; 
                 justify-content: center; 
